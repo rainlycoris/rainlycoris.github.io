@@ -26,10 +26,18 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"
         crossorigin=" anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"
-        crossorigin=" anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" crossorigin=" anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"
         crossorigin="anonymous"></script>
+    <script>
+        var katex_config = {
+            delimiters:
+                [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ]
+        };
+    </script>
     <script>setInterval(function () { renderMathInElement(document.body, ketax_config); }, 1000);</script>
     <div id="root"></div>
 </body>
