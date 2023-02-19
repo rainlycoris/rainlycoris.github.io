@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.cb0443fe.css",
-    "main.js": "/static/js/main.aecaf9e9.js",
+    "main.css": "/static/css/main.f8f33299.css",
+    "main.js": "/static/js/main.e832512d.js",
     "static/js/522.d7f14931.chunk.js": "/static/js/522.d7f14931.chunk.js",
-    "static/media/background.jpg": "/static/media/background.28109b1ab5ab8a478d99.jpg",
+    "static/media/background.jpg": "/static/media/background.7a7ed27f980e87f2e61c.jpg",
     "static/media/loading.png": "/static/media/loading.acd2b2ba2cae023c8c95.png",
     "static/media/GuDianMingChaoTi.ttf": "/static/media/GuDianMingChaoTi.0715b8ad2570a546f0dd.ttf",
     "static/media/snow.svg": "/static/media/snow.a3422e9979b516ac0e53af48b047f3bc.svg",
     "static/media/sun.svg": "/static/media/sun.3c5090ed18de607f2c345dbbf669b119.svg",
-    "static/media/sunshine.svg": "/static/media/sunshine.61be548cf8306ac66f3eedb4e4ca2c57.svg",
     "index.html": "/index.html",
+    "static/media/sunshine.svg": "/static/media/sunshine.61be548cf8306ac66f3eedb4e4ca2c57.svg",
     "static/media/windy.svg": "/static/media/windy.034a0be8fe8c7c2edf76282bb2ef5fa8.svg",
     "static/media/rain.svg": "/static/media/rain.9712114b41138ec05d15225022ee3afd.svg",
     "static/media/message.svg": "/static/media/message.c02656ff2d8c35ef06725aa041b69564.svg",
@@ -40,7 +40,7 @@
     "static/media/send.svg": "/static/media/send.9bd10a1c66230ebbce69b96feff1c533.svg"
   },
   "entrypoints": [
-    "static/css/main.cb0443fe.css",
-    "static/js/main.aecaf9e9.js"
+    "static/css/main.f8f33299.css",
+    "static/js/main.e832512d.js"
   ]
 }
