@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Kratos : Rebirth</title>
+  <title></title>
   
-  <subtitle>一个可爱而现代的 Hexo 主题</subtitle>
+  <subtitle>だから僕らは がんばって挑戦だよね</subtitle>
   <link href="https://krt.moe/atom.xml" rel="self"/>
   
   <link href="https://krt.moe/"/>
@@ -30,6 +30,35 @@
       
     <summary type="html">&lt;p&gt;欢迎使用 &lt;code&gt;Kratos : Rebirth&lt;/code&gt; 这个我们精心打造的 Hexo 主题！希望能在接下来的旅途中与您相伴，共同创造出更多难以忘怀的美好体验。&lt;/p&gt;
 </summary>
+      
+    
+    
+    
+    <category term="全新体验" scheme="https://krt.moe/categories/%E5%85%A8%E6%96%B0%E4%BD%93%E9%AA%8C/"/>
+    
+    
+    <category term="欢迎" scheme="https://krt.moe/tags/%E6%AC%A2%E8%BF%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你好，世界！</title>
+    <link href="https://krt.moe/posts/Blog%E7%B4%A2%E5%BC%95/"/>
+    <id>https://krt.moe/posts/Blog%E7%B4%A2%E5%BC%95/</id>
+    <published>2018-05-06T09:03:12.000Z</published>
+    <updated>2024-07-31T10:10:30.874Z</updated>
+    
+    <content type="html"><![CDATA[<p>君のこころは輝いてるかい？</p><p>$\LARGE \mathscr Part\ \rm A\quad\LARGE\textbf{知识}$</p><p>基本都是我乱写的。</p><p>为了便于挑选文章，下面有几种标记 ：</p><ul><li>$\color{blue}\large\circledcirc$ 意为 <strong>内容完善</strong></li><li>$\color{red}\large\circledcirc$ 意为 <strong>内容简略&#x2F;尚不完整</strong></li><li>$\color{purple}\large\circleddash$ 意为 <strong>施工中&#x2F;内容不严谨</strong></li><li>$\checkmark$ 意为 <strong>推荐</strong></li><li>$\dag$ 意为 <strong>过时&#x2F;可能存在错误</strong></li></ul><ol><li>数据结构<ul><li><a href="//rainlycoris.github.io/#/post/17">可持久化线段树</a> $\color{red}\large\circledcirc$</li><li><a href="//rainlycoris.github.io/#/post/40">整体二分</a> $\color{red}\large\circledcirc$ $\dag$</li><li><a href="//rainlycoris.github.io/#/post/44">dsu on tree</a>$\color{red}\large\circledcirc$</li><li><a href="//rainlycoris.github.io/#/post/50">平衡树合并</a>$\color{blue}\large\circledcirc$ $\checkmark$</li></ul></li><li>数学 <ul><li><a href="//rainlycoris.github.io/#/post/41">异或线性基</a> $\color{blue}\large\circledcirc$</li><li><a href="">fmt&amp;fwt</a></li></ul></li><li>图论<ul><li><a href="//rainlycoris.github.io/#/post/13">联通性相关</a> $\color{blue}\large\circledcirc$</li><li><a href="//rainlycoris.github.io/#/post/34">网络流常见建模</a> $\color{purple}\large\circleddash$</li><li><a href="//rainlycoris.github.io/#/post/19">圆方树</a> $\color{red}\large\circledcirc$</li><li><a href="//rainlycoris.github.io/#/post/54">prufer 序</a> $\color{blue}\large\circledcirc$</li></ul></li><li>动态规划</li><li>杂<ul><li><a href="//rainlycoris.github.io/#/post/42">高维前缀和&#x2F;sosdp</a> $\color{blue}\large\circledcirc$</li><li><a href="//rainlycoris.github.io/#/post/48">切比雪夫距离与曼哈顿距离</a> $\color{blue}\large\circledcirc$ $\checkmark$</li></ul></li></ol><p>$\LARGE \mathscr Part\ \rm B\quad\LARGE\textbf{记录}$</p><p>等我写了 200 道就发出来。</p><p>$\LARGE \mathscr Part\ \rm C\quad\LARGE\textbf{杂}$</p><p>也许是文化课相关内容，或者是我感兴趣的一些研究，再者就是杂谈。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;君のこころは輝いてるかい？&lt;/p&gt;
+&lt;p&gt;$&#92;LARGE &#92;mathscr Part&#92; &#92;rm A&#92;quad&#92;LARGE&#92;textbf{知识}$&lt;/p&gt;
+&lt;p&gt;基本都是我乱写的。&lt;/p&gt;
+&lt;p&gt;为了便于挑选文章，下面有几种标记 ：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$&#92;color{</summary>
       
     
     
