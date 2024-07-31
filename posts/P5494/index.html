@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+    <link rel="icon" href="/assets/favicon.png">
+  
+  
+  <title>P5494 题解 &amp; 平衡树合并 | </title>
+  <link rel="canonical" href="https://krt.moe/posts/P5494/">
+  <meta name="author" content="DaydreamWarrior" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="学习笔记, 平衡树, 平衡树合并, 笔记, 题解" />
+  
+  <meta name="description" content="这是一篇平衡树合并题解，平衡树合并的复杂度 __并不是假的__，本题复杂度 $O(n \log n)$，更通用的可以证明到 $O(\log^2 n)$，比如支持序列 __全局加全局取膜__。 https:&#x2F;&#x2F;codeforces.com&#x2F;blog&#x2F;entry&#x2F;108601 和上面的分析相同，但受个人水平所限可能有误，还希望多多包涵，注意下文 $n,V$ 不分。 平衡树比线段树适用性更广，常数也不大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P5494 题解 &amp; 平衡树合并">
+<meta property="og:url" content="https://krt.moe/posts/P5494/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="这是一篇平衡树合并题解，平衡树合并的复杂度 __并不是假的__，本题复杂度 $O(n \log n)$，更通用的可以证明到 $O(\log^2 n)$，比如支持序列 __全局加全局取膜__。 https:&#x2F;&#x2F;codeforces.com&#x2F;blog&#x2F;entry&#x2F;108601 和上面的分析相同，但受个人水平所限可能有误，还希望多多包涵，注意下文 $n,V$ 不分。 平衡树比线段树适用性更广，常数也不大">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-12-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T15:00:05.581Z">
+<meta property="article:author" content="All contributors">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="平衡树">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="平衡树合并">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/assets/chika_you.webp');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('/assets/mari_you.webp');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+    <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=Noto+Serif+SC&display=swap')</style><style>body { font-family: 'Noto Serif SC' }</style>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    <li>
+                                        
+                                            <a href="/">
+                                        
+                                            
+                                                <i class="fa fa-home"></i>
+                                            
+                                            首页
+                                        </a>
+                                        
+                                    </li>
+                                
+                                    <li>
+                                        
+                                            <a href="/archives/">
+                                        
+                                            
+                                                <i class="fa fa-file"></i>
+                                            
+                                            档案馆
+                                        </a>
+                                        
+                                    </li>
+                                
+                                    <li>
+                                        
+                                            <a>
+                                        
+                                            
+                                                <i class="fa fa-link"></i>
+                                            
+                                            链接
+                                        </a>
+                                        
+                                            <ul class="sub-menu">
+                                                
+                                                    <li>
+                                                        <a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">
+                                                            
+                                                                <i class="fa fa-code"></i>
+                                                            
+                                                            代码仓库
+                                                        </a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a target="_blank" rel="noopener" href="https://wiki.krt.moe">
+                                                            
+                                                                <i class="fa fa-book"></i>
+                                                            
+                                                            项目文档
+                                                        </a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    </li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/"></a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2></h2> <br />
+                        <span>だから僕らは がんばって挑戦だよね</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://krt.moe/posts/P5494/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">P5494 题解 & 平衡树合并</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2023-12-21T16:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-12-22</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">DaydreamWarrior</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~7.19K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-history"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1722438005581"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%90%88%E5%B9%B6"><span class="toc-number">1.</span> <span class="toc-text">平衡树合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">本题的复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E9%80%9A%E7%94%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">更通用的复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%A6%E6%9C%89%E5%88%86%E8%A3%82%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">带有分裂的复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8A%A0%E5%85%A8%E5%B1%80%E5%8F%96%E8%86%9C"><span class="toc-number">5.1.</span> <span class="toc-text">全局加全局取膜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%80%A7"><span class="toc-number">5.2.</span> <span class="toc-text">通用性</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>这是一篇平衡树合并题解，平衡树合并的复杂度 __并不是假的__，本题复杂度 $O(n \log n)$，更通用的可以证明到 $O(\log^2 n)$，比如支持序列 __全局加全局取膜__。</p>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/blog/entry/108601">https://codeforces.com/blog/entry/108601</a></p>
+<p>和上面的分析相同，但受个人水平所限可能有误，还希望多多包涵，注意下文 $n,V$ 不分。</p>
+<p>平衡树比线段树适用性更广，常数也不大（未卡常 fhqtreap 用时 615ms）。</p>
+<h2 id="平衡树合并"><a href="#平衡树合并" class="headerlink" title="平衡树合并"></a>平衡树合并</h2><p>先不考虑分裂，单说合并。</p>
+<p>现在要合并 $x,y$ 两棵树，选根节点堆值大的当根（假设是 $x$），把 $y$ 的子树按照 $x$ 的键值裂开（这里的裂开就是 treap 的 split），裂开的两瓣和 $x$ 的左右儿子递归下去合并。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Merge</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x||!y)</span><br><span class="line">        <span class="keyword">return</span> x|y;</span><br><span class="line">    <span class="keyword">if</span>(tr[x].pri&lt;tr[y].pri)</span><br><span class="line">        <span class="built_in">swap</span>(x,y);</span><br><span class="line">    <span class="type">int</span> l,r;</span><br><span class="line">    <span class="built_in">split</span>(y,tr[x].v,l,r);</span><br><span class="line">    tr[x].l = <span class="built_in">Merge</span>(tr[x].l,l);</span><br><span class="line">    tr[x].r = <span class="built_in">Merge</span>(tr[x].r,r);</span><br><span class="line">    <span class="built_in">pushup</span>(x);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>明显是把小的树裂开更优，但是堆值大大概率就是树大的，下文也默认此情况（主要是带有随机的不会分析）。</p>
+<p>其实这里存在一个合不合并相同结点的问题，其实是 <strong>要合并</strong> 的，因为 treap 的复杂度依赖于树和堆的唯一性，如果存在相同结点那么可能会失去性质（比如全部都一样，可以在不违反树和堆的情况下出来一条链），对于一般的 treap 不存在此问题，因为自带了一个插入时间的比较。</p>
+<p>现在分析平衡树合并的复杂度，设第一棵树大小为 $a$，第二棵为 $b$，不难发现单次合并的复杂度 <strong>上界</strong> 为 $O(\min(a,b)\log(\frac{\max(a,b)}{\min(a,b)}))$，大概是把小的树每个节点都拿去切割大的树，由于 finger search 所以切割复杂度为 $\log(\frac{\max(a,b)}{\min(a,b)})$。总复杂度为 $O(n \log n)$。</p>
+<p>为什么说是上界，因为在两颗树值域重合少的时候复杂度和最少不相交的值域段数 $k$ 有关，合并一次的复杂度为 $O(k \log n)$。</p>
+<h2 id="本题的复杂度分析"><a href="#本题的复杂度分析" class="headerlink" title="本题的复杂度分析"></a>本题的复杂度分析</h2><p>由于合并 $k$ 段值域不相交的复杂度为 $O(k \log n)$，而一次 split 只会产生一段。问题是 $[l,x][x+1,y][y+1,r]$ 如果先合并 $[l,x][y+1,r]$ 再合并 $[x+1,y]$ 会产生额外的一次 $O(\log n)$，但是合并次数等于分裂次数，所以总复杂度为 $O(n \log n)$。</p>
+<h2 id="更通用的复杂度分析"><a href="#更通用的复杂度分析" class="headerlink" title="更通用的复杂度分析"></a>更通用的复杂度分析</h2><p>定义势能为 $\varphi(T)&#x3D;\sum\log(v_{i+1}-v_i)$，也就是 $T$ 相邻的两个值的差的 $\log$ 之和。</p>
+<p>合并 $A$ 和 $B$，有 $k$ 段值域：</p>
+<p>$$<br>\begin{aligned}<br>&amp;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <em>{&lt;-d_1-&gt;}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </em>{&lt;–d_2–&gt;}\ \ \ \ \ \ \ \ \ \ <em>{&lt;–d_3–&gt;}\ \ \ \ \ \ \ \ \ \ </em>{&lt;—d_4—&gt;}\<br>&amp;A &#x3D; {<em>{[–a_1–]}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </em>{[-a_2-]}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <em>{[–a_3–]}&amp;}\<br>&amp;B &#x3D; {\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ </em>{[—b_1—]}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ _{[-b_2-]}&amp;}<br>\end{aligned}<br>$$</p>
+<p>形如 $<em>{[—–]}$ 的是一段值域，形如 $</em>{&lt;–d_i–&gt;}$ 的是值域之间的距离且距离为 $d_i$。</p>
+<p>合并后 $\Delta\varphi&#x3D;\varphi(A)+\varphi(B)-\varphi(A\cup B)$，有<br>$$<br>\Delta\varphi&#x3D;\log(d_1+b_1+d_2)+\log(d_2+a_2+d_3)+\dots+\log(d_{k-1}+a_{\frac{k}{2}}+d_k)-(\log d_1+\dots+\log d_k)<br>$$</p>
+<p>前面的把 $\log(+a_i+)$ 的放在一起就是根据定义算的 $\varphi(A)$，后面的则是由于两段值域不交合并会产生新的势能，势能大小为 $\log$ 值域的距离也就是 $\log(d_i)$。</p>
+<p>显然有<br>$$<br>\Delta\varphi\geq\log(d_1+d_2)+\log(d_2+d_3)+\dots+\log(d_{k-1}+d_k)-(\log d_1+\dots+\log d_k)<br>$$</p>
+<p>因为 $\log$ 函数是下凸的，可得 $\log(\frac{a+b}{2})\geq \frac{\log a+\log b}{2}$，把 $\log$ 里的 $\frac{1}{2}$ 拿出来可得<br>$$<br>\log(a+b)\geq 1+\frac{\log a+\log b}{2}<br>$$</p>
+<p>那么把 $\log(d_{i-1}+d_i)$ 全部拆开，可得<br>$$<br>\Delta\varphi\geq k-1-\frac{d_1+d_k}{2}<br>$$</p>
+<p>忽略常数可得<br>$$<br>\Delta\varphi\geq k-O(\log V)<br>$$</p>
+<p>也就是说最多做 $n \log V$ 次 split，总复杂度为 $O(n \log V \log n)$。</p>
+<h2 id="带有分裂的复杂度分析"><a href="#带有分裂的复杂度分析" class="headerlink" title="带有分裂的复杂度分析"></a>带有分裂的复杂度分析</h2><p>一次分裂会减少 $\log V$ 的势能，split 是不增加势能的。</p>
+<p>一次合并如果增加就至多增加 $\log V$ 的势能（原因可以看上面的式子）。</p>
+<p>那么最多就只有 $n\log V$ 的势能，而 $\Delta \varphi$ 最大就是把这些势能都减少完，所以总复杂度为 $O(n \log n \log V)$。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200005</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"></span><br><span class="line"><span class="function">mt19937 <span class="title">myrand</span><span class="params">(<span class="number">713</span>)</span></span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">fhqtreap</span>&#123;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">struct</span>&#123;<span class="type">int</span> l,r,v,s,siz;<span class="type">unsigned</span> pri;&#125; tr[<span class="number">2</span>*N];</span><br><span class="line">        <span class="type">int</span> rt[N];</span><br><span class="line">        <span class="type">int</span> idx;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">create</span><span class="params">(<span class="type">int</span> v,<span class="type">int</span> s)</span></span>&#123;tr[++idx] = &#123;<span class="number">0</span>,<span class="number">0</span>,v,s,s,<span class="built_in">myrand</span>()&#125;;<span class="keyword">return</span> idx;&#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;tr[u].siz = tr[tr[u].l].siz+tr[tr[u].r].siz+tr[u].s;&#125;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="type">int</span>&amp; <span class="keyword">operator</span> [] (<span class="type">const</span> <span class="type">int</span> &amp;x)&#123;<span class="keyword">return</span> rt[x];&#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">split</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> c,<span class="type">int</span> &amp;x,<span class="type">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!u)&#123;</span><br><span class="line">                x = y = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(tr[u].v&lt;=c)&#123;</span><br><span class="line">                x = u;</span><br><span class="line">                <span class="built_in">split</span>(tr[u].r,c,tr[x].r,y);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                y = u;</span><br><span class="line">                <span class="built_in">split</span>(tr[u].l,c,x,tr[y].l);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">pushup</span>(u);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">split_rk</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> c,<span class="type">int</span> &amp;x,<span class="type">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!u)&#123;</span><br><span class="line">                x = y = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(tr[tr[u].l].siz+tr[u].s&lt;=c)&#123;</span><br><span class="line">                x = u;</span><br><span class="line">                <span class="built_in">split_rk</span>(tr[u].r,c-tr[tr[u].l].siz-tr[u].s,tr[x].r,y);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                y = u;</span><br><span class="line">                <span class="built_in">split_rk</span>(tr[u].l,c,x,tr[y].l);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">pushup</span>(u);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!x||!y)</span><br><span class="line">                <span class="keyword">return</span> x|y;</span><br><span class="line">            <span class="keyword">if</span>(tr[x].pri&gt;tr[y].pri)&#123;</span><br><span class="line">                tr[x].r = <span class="built_in">merge</span>(tr[x].r,y);</span><br><span class="line">                <span class="built_in">pushup</span>(x);</span><br><span class="line">                <span class="keyword">return</span> x;</span><br><span class="line">            &#125;</span><br><span class="line">            tr[y].l = <span class="built_in">merge</span>(x,tr[y].l);</span><br><span class="line">            <span class="built_in">pushup</span>(y);</span><br><span class="line">            <span class="keyword">return</span> y;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">Merge</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!x||!y)</span><br><span class="line">                <span class="keyword">return</span> x|y;</span><br><span class="line">            <span class="keyword">if</span>(tr[x].pri&lt;tr[y].pri)</span><br><span class="line">                <span class="built_in">swap</span>(x,y);</span><br><span class="line">            <span class="type">int</span> l,r;</span><br><span class="line">            <span class="built_in">split</span>(y,tr[x].v,l,r);</span><br><span class="line">            tr[x].l = <span class="built_in">Merge</span>(tr[x].l,l);</span><br><span class="line">            tr[x].r = <span class="built_in">Merge</span>(tr[x].r,r);</span><br><span class="line">            <span class="built_in">pushup</span>(x);</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> &amp;u,<span class="type">int</span> c,<span class="type">int</span> s)</span></span>&#123;</span><br><span class="line">            <span class="type">int</span> x,y;</span><br><span class="line">            <span class="built_in">split</span>(u,c,x,y);</span><br><span class="line">            u = <span class="built_in">merge</span>(<span class="built_in">merge</span>(x,<span class="built_in">create</span>(c,s)),y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">kth</span><span class="params">(<span class="type">int</span> &amp;u,<span class="type">int</span> K)</span></span>&#123;</span><br><span class="line">            <span class="type">int</span> x,y;</span><br><span class="line">            <span class="built_in">split_rk</span>(u,K<span class="number">-1</span>,x,y);</span><br><span class="line">            <span class="type">int</span> p = y;</span><br><span class="line">            <span class="keyword">while</span>(tr[p].l)</span><br><span class="line">                p = tr[p].l;</span><br><span class="line">            u = <span class="built_in">merge</span>(x,y);</span><br><span class="line">            <span class="keyword">return</span> p?tr[p].v:<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">count</span><span class="params">(<span class="type">int</span> &amp;u,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">            <span class="type">int</span> x,y,z;</span><br><span class="line">            <span class="built_in">split</span>(u,l<span class="number">-1</span>,x,y);</span><br><span class="line">            <span class="built_in">split</span>(y,r,y,z);</span><br><span class="line">            <span class="type">int</span> ans = tr[y].siz;</span><br><span class="line">            u = <span class="built_in">merge</span>(<span class="built_in">merge</span>(x,y),z);</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">move</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> &amp;y,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">            <span class="type">int</span> a,b,c;</span><br><span class="line">            <span class="built_in">split</span>(x,l<span class="number">-1</span>,a,b);</span><br><span class="line">            <span class="built_in">split</span>(b,r,b,c);</span><br><span class="line">            y = b;</span><br><span class="line">            x = <span class="built_in">merge</span>(a,c);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;tr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n = in,m = in;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        tr.<span class="built_in">insert</span>(tr[<span class="number">1</span>],k,in);</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(m--)&#123;</span><br><span class="line">        <span class="type">int</span> op = in,p = in;</span><br><span class="line">        <span class="keyword">if</span>(!op)&#123;</span><br><span class="line">            <span class="type">int</span> x = in,y = in;</span><br><span class="line">            tr.<span class="built_in">move</span>(tr[p],tr[++idx],x,y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(op==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="type">int</span> t = in;</span><br><span class="line">            tr[p] = tr.<span class="built_in">Merge</span>(tr[p],tr[t]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(op==<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="type">int</span> x = in,q = in;</span><br><span class="line">            tr.<span class="built_in">insert</span>(tr[p],q,x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(op==<span class="number">3</span>)&#123;</span><br><span class="line">            <span class="type">int</span> x = in,y = in;</span><br><span class="line">            <span class="built_in">out</span>(tr.<span class="built_in">count</span>(tr[p],x,y),<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">out</span>(tr.<span class="built_in">kth</span>(tr[p],in),<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="全局加全局取膜"><a href="#全局加全局取膜" class="headerlink" title="全局加全局取膜"></a>全局加全局取膜</h3><p>全局加不影响势能。</p>
+<p>如果取模的过程中把树分成了 $k$ 段，合并后产生了至多 $(k-1) \log v$ 的势能，但是 $v$ 也会变成 $\dfrac{v}{k}$。把 $\log v$ 提到外面来，显然每轮最劣的 $k$ 都是一样的，因为这是一个递归的问题。原问题变成了 $k$ 使得 $k\log_k n$ 最大。解得最小值取 $e$，最大值为 $n$。所以增加的势能最大为 $n \log v$。</p>
+<p>所以总复杂度为 $O(n \log n\log v)$。</p>
+<h3 id="通用性"><a href="#通用性" class="headerlink" title="通用性"></a>通用性</h3><p>确实这东西很能拓展，只要不咋影响势能都可以把合并当作基本操作，比如加、除、取膜、开根、翻转。</p>
+<p>其实全局取膜作用与值域区间也是对的，值域区间完全可以把它当成两个独立的序列分别操作后再 merge 起来，分别操作也就是 $(n-m)\log v+m \log v&#x3D; n\log v$，完全不影响。最后只是常数段的 merge 新增的 $\log v$ 的势能。所以只会增加总共 $n \log v$ 的势能。别的同理。</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <span itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</span>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a>, <a class="tag-none-link" href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" rel="tag">平衡树</a>, <a class="tag-none-link" href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%90%88%E5%B9%B6/" rel="tag">平衡树合并</a>, <a class="tag-none-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>, <a class="tag-none-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-07-31T15:00:05.581Z" itemprop="dateModified">最后编辑：2024-07-31</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" Blog 索引" href="/posts/Blog索引/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" P9989 题解" href="/posts/P9989/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/assets/honoka.png" alt="All contributors" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">私たち、輝きたい！</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                30
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                35
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%90%88%E5%B9%B6"><span class="toc-text">平衡树合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-text">本题的复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E9%80%9A%E7%94%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-text">更通用的复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%A6%E6%9C%89%E5%88%86%E8%A3%82%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-text">带有分裂的复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8A%A0%E5%85%A8%E5%B1%80%E5%8F%96%E8%86%9C"><span class="toc-text">全局加全局取膜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%80%A7"><span class="toc-text">通用性</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/atcoder/" style="font-size: 0.73em;">atcoder</a> <a href="/tags/dsu-on-tree/" style="font-size: 0.6em;">dsu on tree</a> <a href="/tags/prufer-%E5%BA%8F%E5%88%97/" style="font-size: 0.6em;">prufer 序列</a> <a href="/tags/%E4%BB%99%E4%BA%BA%E6%8E%8C/" style="font-size: 0.6em;">仙人掌</a> <a href="/tags/%E5%88%86%E5%9D%97/" style="font-size: 0.6em;">分块</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 0.6em;">可持久化</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%95%B0/" style="font-size: 0.6em;">可持久化线段数</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 0.6em;">可持久化线段树</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 0.67em;">图论</a> <a href="/tags/%E5%9C%86%E6%96%B9%E6%A0%91/" style="font-size: 0.6em;">圆方树</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 0.8em;">学习笔记</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AC%94%E8%AE%B0/" style="font-size: 0.6em;">学习笔记笔记</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" style="font-size: 0.67em;">平衡树</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%90%88%E5%B9%B6/" style="font-size: 0.6em;">平衡树合并</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 0.67em;">并查集</a> <a href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A/" style="font-size: 0.67em;">强连通</a> <a href="/tags/%E6%89%AB%E6%8F%8F%E7%BA%BF/" style="font-size: 0.6em;">扫描线</a> <a href="/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/" style="font-size: 0.6em;">整体二分</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/P10656/"><i class="fa fa-book"></i> P10656 题解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/%E7%A5%9DAqours%E4%B9%9D%E5%91%A8%E5%B9%B4/"><i class="fa fa-book"></i> 祝 Aqours 九周年</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/prufer%E5%BA%8F%E5%88%97/"><i class="fa fa-book"></i> prufer 序列</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/P9989/"><i class="fa fa-book"></i> P9989 题解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/P5494/"><i class="fa fa-book"></i> P5494 题解 & 平衡树合并</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 All contributors 版权所有.</li>
+                            <li>本站已在风雨中飘摇<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 <a href="https://github.com/Candinya/Kratos-Rebirth/graphs/contributors" target="_blank">All contributors</a> 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                            <div>
+                                
+                                    <li>由 <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> 强力驱动</li>
+                                
+                                    <li>在 <a href="https://github.io" target="_blank">Github Pages</a> 暖心托管</li>
+                                
+                            </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+
+
+
+<!-- 额外的追加注入项 -->
+
+    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: !0 }, { left: "$", right: "$", display: !1 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setInterval((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

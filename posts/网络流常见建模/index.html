@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+    <link rel="icon" href="/assets/favicon.png">
+  
+  
+  <title>网络流常见建模 | </title>
+  <link rel="canonical" href="https://krt.moe/posts/%E7%BD%91%E7%BB%9C%E6%B5%81%E5%B8%B8%E8%A7%81%E5%BB%BA%E6%A8%A1/">
+  <meta name="author" content="DaydreamWarrior" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="学习笔记笔记, 网络流" />
+  
+  <meta name="description" content="本文主要讲建图方法，定义和证明内容较少。 正好网络流二十四题做完了整理下。 目录 网络流模型 最大流最小割 最小割树 平面图最小割   费用流 SSP 算法 有负圈的费用流   上下界建模 无源汇上下界可行流 有源汇上下界可行流 有源汇上下界最大&#x2F;小流     经典问题 二分图 二分图最大匹配 二分图最小点覆盖 二分图最大独立集   路径覆盖与链覆盖 DAG 最小路径覆盖 DAG 最小链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络流常见建模">
+<meta property="og:url" content="https://krt.moe/posts/%E7%BD%91%E7%BB%9C%E6%B5%81%E5%B8%B8%E8%A7%81%E5%BB%BA%E6%A8%A1/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="本文主要讲建图方法，定义和证明内容较少。 正好网络流二十四题做完了整理下。 目录 网络流模型 最大流最小割 最小割树 平面图最小割   费用流 SSP 算法 有负圈的费用流   上下界建模 无源汇上下界可行流 有源汇上下界可行流 有源汇上下界最大&#x2F;小流     经典问题 二分图 二分图最大匹配 二分图最小点覆盖 二分图最大独立集   路径覆盖与链覆盖 DAG 最小路径覆盖 DAG 最小链">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T14:59:21.627Z">
+<meta property="article:author" content="All contributors">
+<meta property="article:tag" content="网络流">
+<meta property="article:tag" content="学习笔记笔记">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/assets/chika_you.webp');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('/assets/mari_you.webp');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+    <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=Noto+Serif+SC&display=swap')</style><style>body { font-family: 'Noto Serif SC' }</style>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    <li>
+                                        
+                                            <a href="/">
+                                        
+                                            
+                                                <i class="fa fa-home"></i>
+                                            
+                                            首页
+                                        </a>
+                                        
+                                    </li>
+                                
+                                    <li>
+                                        
+                                            <a href="/archives/">
+                                        
+                                            
+                                                <i class="fa fa-file"></i>
+                                            
+                                            档案馆
+                                        </a>
+                                        
+                                    </li>
+                                
+                                    <li>
+                                        
+                                            <a>
+                                        
+                                            
+                                                <i class="fa fa-link"></i>
+                                            
+                                            链接
+                                        </a>
+                                        
+                                            <ul class="sub-menu">
+                                                
+                                                    <li>
+                                                        <a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">
+                                                            
+                                                                <i class="fa fa-code"></i>
+                                                            
+                                                            代码仓库
+                                                        </a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a target="_blank" rel="noopener" href="https://wiki.krt.moe">
+                                                            
+                                                                <i class="fa fa-book"></i>
+                                                            
+                                                            项目文档
+                                                        </a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    </li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/"></a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2></h2> <br />
+                        <span>だから僕らは がんばって挑戦だよね</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://krt.moe/posts/%E7%BD%91%E7%BB%9C%E6%B5%81%E5%B8%B8%E8%A7%81%E5%BB%BA%E6%A8%A1/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">网络流常见建模</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2023-06-29T16:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-06-30</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">DaydreamWarrior</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.77K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-history"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1722437961627"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">网络流模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81%E6%9C%80%E5%B0%8F%E5%89%B2"><span class="toc-number">2.1.</span> <span class="toc-text">最大流最小割</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%89%B2%E6%A0%91"><span class="toc-number">2.1.1.</span> <span class="toc-text">最小割树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gomory-Hu-%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">Gomory-Hu 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83-%E4%BE%8B%E9%A2%98"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">参考&amp;例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%9C%80%E5%B0%8F%E5%89%B2"><span class="toc-number">2.1.2.</span> <span class="toc-text">平面图最小割</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">平面图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%9B%BE"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">对偶图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%9B%BE%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">对偶图的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83-%E4%BE%8B%E9%A2%98-1"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">参考&amp;例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B9%E7%94%A8%E6%B5%81"><span class="toc-number">2.2.</span> <span class="toc-text">费用流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSP-%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">SSP 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83-%E4%BE%8B%E9%A2%98-2"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">参考&amp;例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E8%B4%9F%E5%9C%88%E7%9A%84%E8%B4%B9%E7%94%A8%E6%B5%81"><span class="toc-number">2.2.2.</span> <span class="toc-text">有负圈的费用流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.3.</span> <span class="toc-text">上下界建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-number">2.3.1.</span> <span class="toc-text">无源汇上下界可行流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-number">2.3.2.</span> <span class="toc-text">有源汇上下界可行流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E6%9C%80%E5%A4%A7-%E5%B0%8F%E6%B5%81"><span class="toc-number">2.3.3.</span> <span class="toc-text">有源汇上下界最大&#x2F;小流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">最大流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%81"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">最小流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="toc-number">2.3.3.3.</span> <span class="toc-text">例题</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="toc-number">3.1.</span> <span class="toc-text">二分图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="toc-number">3.1.1.</span> <span class="toc-text">二分图最大匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96"><span class="toc-number">3.1.2.</span> <span class="toc-text">二分图最小点覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="toc-number">3.1.3.</span> <span class="toc-text">二分图最大独立集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E4%B8%8E%E9%93%BE%E8%A6%86%E7%9B%96"><span class="toc-number">3.2.</span> <span class="toc-text">路径覆盖与链覆盖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="toc-number">3.2.1.</span> <span class="toc-text">DAG 最小路径覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG-%E6%9C%80%E5%B0%8F%E9%93%BE%E8%A6%86%E7%9B%96"><span class="toc-number">3.2.2.</span> <span class="toc-text">DAG 最小链覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG-%E6%9C%80%E9%95%BF%E5%8F%8D%E9%93%BE"><span class="toc-number">3.2.3.</span> <span class="toc-text">DAG 最长反链</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%9D%83%E9%97%AD%E5%90%88%E5%AD%90%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">最大权闭合子图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-2"><span class="toc-number">3.3.0.1.</span> <span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%AF%86%E5%BA%A6%E5%AD%90%E5%9B%BE"><span class="toc-number">3.4.</span> <span class="toc-text">最大密度子图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-3"><span class="toc-number">3.4.0.1.</span> <span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E5%BB%BA%E6%A8%A1"><span class="toc-number">3.5.</span> <span class="toc-text">各种建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E7%82%B9"><span class="toc-number">3.5.1.</span> <span class="toc-text">拆点</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>本文主要讲建图方法，定义和证明内容较少。</p>
+<p>正好网络流二十四题做完了整理下。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>网络流模型<ul>
+<li>最大流最小割<ul>
+<li>最小割树</li>
+<li>平面图最小割</li>
+</ul>
+</li>
+<li>费用流<ul>
+<li>SSP 算法</li>
+<li>有负圈的费用流</li>
+</ul>
+</li>
+<li>上下界建模<ul>
+<li>无源汇上下界可行流</li>
+<li>有源汇上下界可行流</li>
+<li>有源汇上下界最大&#x2F;小流</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>经典问题<ul>
+<li>二分图<ul>
+<li>二分图最大匹配</li>
+<li>二分图最小点覆盖</li>
+<li>二分图最大独立集</li>
+</ul>
+</li>
+<li>路径覆盖与链覆盖<ul>
+<li>DAG 最小路径覆盖</li>
+<li>DAG 最小链覆盖</li>
+<li>DAG 最长反链</li>
+</ul>
+</li>
+<li>最大权闭合子图</li>
+<li>最大密度子图</li>
+</ul>
+</li>
+<li>各种建模<ul>
+<li>拆点</li>
+<li>分层图</li>
+<li>最大流相关</li>
+<li>最小割相关<ul>
+<li>最小割离散变量模型（切糕）</li>
+</ul>
+</li>
+<li>费用流相关</li>
+<li>杂<ul>
+<li>区间问题常见建模</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="网络流模型"><a href="#网络流模型" class="headerlink" title="网络流模型"></a>网络流模型</h1><h2 id="最大流最小割"><a href="#最大流最小割" class="headerlink" title="最大流最小割"></a>最大流最小割</h2><p>最大流 &#x3D; 最小割是网络流中的重要结论，运用最大流和最小割可以解决一些复杂度划分问题。</p>
+<h3 id="最小割树"><a href="#最小割树" class="headerlink" title="最小割树"></a>最小割树</h3><p>主要解决 <strong>多次询问</strong> 无向图两点之间的最小割的问题。</p>
+<p>一个 $N$ 个点的图上，两点之间只有 $N$ 中本质不同的最小割。因此一定存在一棵树，满足树上两点的最小割等于原图上两点的最小割。我们把这样的树称之为 __最小割树__。</p>
+<h4 id="Gomory-Hu-算法"><a href="#Gomory-Hu-算法" class="headerlink" title="Gomory-Hu 算法"></a>Gomory-Hu 算法</h4><p>考虑分治，在所有点中任取两个作为源汇点求出最小割，划分成两个互不连通的割集。对这两个点连边，边权为求出来的最小割。然后对与两个割集递归下去做。同时每次的最小割都是对于全局跑的，</p>
+<p>询问两个点之间的最小割，就是求这两个点在最小割树上的路径中最小的边。可以用倍增实现。</p>
+<h4 id="参考-例题"><a href="#参考-例题" class="headerlink" title="参考&amp;例题"></a>参考&amp;例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4897">P4897【模板】最小割树</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/Eznibuil/solution-p4897">证明见 Eznibuil 博客</a></p>
+<h3 id="平面图最小割"><a href="#平面图最小割" class="headerlink" title="平面图最小割"></a>平面图最小割</h3><p>平面图最小割 &#x3D; 对偶图最短路。</p>
+<h4 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h4><p>如果图 $G$ 能画在平面 $S$ 上，且除顶点外无边相交，则称 $G$ 可平面嵌入 $S$，$G$ 可称为可平面图或平面图，画出的没有边相交的图称为 $G$ 的平面表示或平面嵌入。</p>
+<h4 id="对偶图"><a href="#对偶图" class="headerlink" title="对偶图"></a>对偶图</h4><p>设 $G$ 是平面图的某一个平面嵌入，构造图 $G^*$：</p>
+<ol>
+<li>在 $G$ 的每个面放 $R_i$ 置 $G^*$ 的一个顶点 $v^*$。</li>
+<li>设 $e$ 为 $G$ 的一条边，若 $e$ 在 $G$ 的面 $R_i$ 和 $R_j$ 的公共边上，做 $G^*$ 的边 $e^*$ 与 $e$ 相交，且 $e^*$ 连接 $G^*$ 的顶点 $v_i^*,v_j^*$，即 $e^*&#x3D;(v_i^*,v_j^*)$，$e^*$ 不与其他边相交。若 $e$ 为 $G$ 中的桥且在 $R_i$ 的边界上，则 $e^*$ 是以 $R_i$ 中顶点 $v_i^*$ 为端点的环，即 $e^*&#x3D;(v_i^*,v_j^*)$。</li>
+</ol>
+<p>形象化的说，对偶图就是把平面图的每条边 __旋转了 $90$ 度__。</p>
+<h4 id="对偶图的性质"><a href="#对偶图的性质" class="headerlink" title="对偶图的性质"></a>对偶图的性质</h4><ol>
+<li>$G^*$ 为平面图，且为平面嵌入。</li>
+<li>$G$ 中自环对应 $G^*$ 桥，$G$ 中桥对应 $G^*$ 自环。</li>
+<li>$G^*$ 是连通的。</li>
+<li>若 $G$ 的面 $R_i,R_j$ 的边界上至少有两条公共边，则关联<br>$v_i^*,v_j^*$ 的边有平行边，$G^*$ 多半是多重图。</li>
+<li>同构的图的对偶图不一定是同构的。</li>
+<li>$G^{**}$ 与 $G$ 同构当且仅当 $G$ 是连通图。</li>
+<li>平面图最小割 &#x3D; 对偶图最短路</li>
+</ol>
+<h4 id="参考-例题-1"><a href="#参考-例题-1" class="headerlink" title="参考&amp;例题"></a>参考&amp;例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2046">P2046 [NOI2010] 海拔</a></p>
+<p><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/planar/">oi-wiki</a></p>
+<h2 id="费用流"><a href="#费用流" class="headerlink" title="费用流"></a>费用流</h2><p>可以解决一些需要最优化的问题。</p>
+<h3 id="SSP-算法"><a href="#SSP-算法" class="headerlink" title="SSP 算法"></a>SSP 算法</h3><p>每次寻找单位费用最小的增广路进行增广，直到图上不存在增广路为止。</p>
+<p>如果图上存在单位费用为负的圈，SSP 算法正确无法求出该网络的最小费用最大流。</p>
+<p>设该网络的最大流为 $f$ ，则最坏时间复杂度为 $O(nmf)$。SSP 算法是 <strong>伪多项式时间</strong> 的。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>只需将 EK 算法或 Dinic 算法中找增广路的过程，替换为用最短路算法寻找单位费用最小的增广路即可。</p>
+<h4 id="参考-例题-2"><a href="#参考-例题-2" class="headerlink" title="参考&amp;例题"></a>参考&amp;例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3381">P7173【模板】最小费用最大流 </a></p>
+<p><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/flow/min-cost/">oi-wiki</a></p>
+<h3 id="有负圈的费用流"><a href="#有负圈的费用流" class="headerlink" title="有负圈的费用流"></a>有负圈的费用流</h3><p>由于存在最短路，所以费用流算法不能直接做费用有负圈的图。</p>
+<p>消圈算法本身就有消除负圈的过程，但是效率低下。</p>
+<p>对于网络中的负费用边 $(x,y)$，强制满流。然后加入 $(y,x)$，费用为原来费用的相反数，用于退流。</p>
+<p>跑有源汇上下界最小费用最大流即可。</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7173">P7173 【模板】有负圈的费用流</a></p>
+<h2 id="上下界建模"><a href="#上下界建模" class="headerlink" title="上下界建模"></a>上下界建模</h2><p>上下界网络流本质是给流量网络的每一条边设置了流量上界 $c(u,v)$ 和流量下界 $b(u,v)$ 。也就是说，一种可行的流必须满足 $b(u,v) \leq f(u,v) \leq c(u,v)$ 。同时必须满足除了源点和汇点之外的其余点流量平衡。</p>
+<h3 id="无源汇上下界可行流"><a href="#无源汇上下界可行流" class="headerlink" title="无源汇上下界可行流"></a>无源汇上下界可行流</h3><p>先假设每条边已经流了 $b(u,v)$ 的流量，在新图中加入流量为 $c(u,v)-b(u,v)$ 的边。</p>
+<p>最大流需要满足初始流量平衡条件，但是构造出来的初始流很有可能不满足初始流量平衡。</p>
+<p>假设一个点初始流入流量减初始流出流量为 $M$，同时建立附加源点 $S’$ 和附加汇点 $T’$：</p>
+<ul>
+<li>$M&#x3D;0$ 流量平衡</li>
+<li>$M&gt;0$ 入流量大，$S$ 向其连流量为 $M$ 的边</li>
+<li>$M&lt;0$ 出流量大，其向 $T$ 连流量为 $-M$ 的边</li>
+</ul>
+<p>如果附加边满流，说明这一个点的流量平衡条件可以满足，否则这个点的流量平衡条件不满足。</p>
+<p>在建图完毕之后跑 $S’$ 到 $T’$ 的最大流，若 $S’$ 连出去的边全部满流，则存在可行流，否则不存在。</p>
+<h3 id="有源汇上下界可行流"><a href="#有源汇上下界可行流" class="headerlink" title="有源汇上下界可行流"></a>有源汇上下界可行流</h3><p>设源点为 $s$，汇点为 $t$。添加一条 $t$ 到 $s$ 的上界为 $\infty$ 下界为 $0$ 的边。</p>
+<p>注意这里的源汇点已被视为普通点，与超级源汇点不同的。</p>
+<h3 id="有源汇上下界最大-小流"><a href="#有源汇上下界最大-小流" class="headerlink" title="有源汇上下界最大&#x2F;小流"></a>有源汇上下界最大&#x2F;小流</h3><h4 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h4><p>先找到可行流，然后删去附加边 $t \rightarrow s$，在残留网络上跑最大流。</p>
+<p>将可行流流量和最大流流量相加即为答案。</p>
+<h4 id="最小流"><a href="#最小流" class="headerlink" title="最小流"></a>最小流</h4><p>先在没加附加边的网络上跑最大流，再对残量网络加入附加边 $t \rightarrow s$，最小流即为附加边的流量。</p>
+<h4 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h4><ul>
+<li>最大流：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5192">P5192 Zoj3229 Shoot the Bullet|东方文花帖|【模板】有源汇上下界最大流 </a></li>
+<li>最小流：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4843">P4843 清理雪道</a></li>
+</ul>
+<h1 id="经典问题"><a href="#经典问题" class="headerlink" title="经典问题"></a>经典问题</h1><h2 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h2><h3 id="二分图最大匹配"><a href="#二分图最大匹配" class="headerlink" title="二分图最大匹配"></a>二分图最大匹配</h3><p>将源点连上左边所有点，右边所有点连上汇点，容量dou为 $1$。原来的每条边从左往右连边，容量也皆为 $1$，最大流即最大匹配。</p>
+<p>如果用 <code>Dinic</code> 算法求最大流，时间复杂度为 $\sqrt{n}m$。</p>
+<h3 id="二分图最小点覆盖"><a href="#二分图最小点覆盖" class="headerlink" title="二分图最小点覆盖"></a>二分图最小点覆盖</h3><blockquote>
+<p>最小点覆盖：选最少的点，满足每条边至少有一个端点被选。</p>
+</blockquote>
+<p>König 定理：最小点覆盖 $&#x3D;$ 最大匹配。</p>
+<h3 id="二分图最大独立集"><a href="#二分图最大独立集" class="headerlink" title="二分图最大独立集"></a>二分图最大独立集</h3><blockquote>
+<p>最大独立集：选最多的点，满足两两之间没有边相连。</p>
+</blockquote>
+<p>二分图中，最大独立集 $&#x3D;n\ -$ 最小点覆盖。</p>
+<p>因为在最小点覆盖中，任意一条边都被至少选了一个顶点，所以对于其点集的补集，任意一条边都被至多选了一个顶点，所以不存在边连接两个点集中的点，且该点集最大。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/graph-matching/bigraph-weight-match/">oiwiki</a></p>
+<h2 id="路径覆盖与链覆盖"><a href="#路径覆盖与链覆盖" class="headerlink" title="路径覆盖与链覆盖"></a>路径覆盖与链覆盖</h2><h3 id="DAG-最小路径覆盖"><a href="#DAG-最小路径覆盖" class="headerlink" title="DAG 最小路径覆盖"></a>DAG 最小路径覆盖</h3><blockquote>
+<p>DAG 最小路径覆盖：尽可能少的不相交的路径（链）覆盖掉所有节点。</p>
+</blockquote>
+<p>考虑把单个结点也看成一条路径，相邻结点合并路径条数就会减少，所以要最大化可以合并的个数。</p>
+<p>因为是最大化合并，考虑 <strong>二分图最大匹配</strong> ，把每个点拆成 $u’$ 和 $u’’$，原图上边 $u \rightarrow v$ 就在新图上连一条 $u’ \rightarrow v’’$，跑二分图最大匹配，就是最大的可合并的点数，总点数减去大的可合并的点数就是最小路径覆盖。</p>
+<h3 id="DAG-最小链覆盖"><a href="#DAG-最小链覆盖" class="headerlink" title="DAG 最小链覆盖"></a>DAG 最小链覆盖</h3><blockquote>
+<p>DAG 最小链覆盖：尽可能少的的路径（链）覆盖掉所有节点，可以相交。</p>
+</blockquote>
+<p>最小链覆盖与最小路径覆盖非常相近，考虑将最小链覆盖转化为最小路径覆盖。</p>
+<p>用 <code>Floyd</code> 求出原图的传递闭包，直接在传递闭包上跑最小路径覆盖即可。</p>
+<blockquote>
+<p>传递闭包：这里简单理解为对于所有联通的点对连边的新图</p>
+</blockquote>
+<h3 id="DAG-最长反链"><a href="#DAG-最长反链" class="headerlink" title="DAG 最长反链"></a>DAG 最长反链</h3><blockquote>
+<p>反链：点的集合满足任意 $x,y$，$x,y$ 互不连通</p>
+</blockquote>
+<p>Dilworth 定理：最小链覆盖大小 $&#x3D;$ 最长反链长度。</p>
+<h2 id="最大权闭合子图"><a href="#最大权闭合子图" class="headerlink" title="最大权闭合子图"></a>最大权闭合子图</h2><blockquote>
+<p>闭合子图：对于点集 $S$，任意 $u\in S$，$u$ 的出边的另一个点也属于 $S$。</p>
+</blockquote>
+<blockquote>
+<p>最大权闭合子图：点权和最大的闭合子图。</p>
+</blockquote>
+<p>最大权闭合子图 $&#x3D;$ 正权和 $-$ 最小割</p>
+<h4 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2762">P2762 太空飞行计划问题 </a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3410">P3410 拍照</a></p>
+<h2 id="最大密度子图"><a href="#最大密度子图" class="headerlink" title="最大密度子图"></a>最大密度子图</h2><blockquote>
+<p>最大密度子图：闭合子图使得 $\frac{|E|}{|V|}$ 最大。</p>
+</blockquote>
+<p>一般情况下，我们使用 <strong>01 分数规划</strong> 解决最大密度子图问题。</p>
+<p>二分比值 $v$，建图</p>
+<ul>
+<li>$S$ 到 $i$ 连容量为 $m$ 的边</li>
+<li>$i$ 到 $T$ 连容量为 $m+2*v-deg_i$ 的边</li>
+<li>原图上的边容量为 $1$</li>
+</ul>
+<p>如果流量 $&#x3D;n\times m$ 就存在密度为 $\geq v$ 的子图。</p>
+<p>一般来说二分的 $eps$ 不能设太小，不然无法判断边是否有流量。</p>
+<h4 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA1389">UVA1389 Hard Life</a></p>
+<h2 id="各种建模"><a href="#各种建模" class="headerlink" title="各种建模"></a>各种建模</h2><h3 id="拆点"><a href="#拆点" class="headerlink" title="拆点"></a>拆点</h3><p>本质上是将点的限制转化为边的限制。</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <span itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</span>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记笔记</a>, <a class="tag-none-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-07-31T14:59:21.627Z" itemprop="dateModified">最后编辑：2024-07-31</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" APIO2023 赛博乐园" href="/posts/APIO2023/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 网络流常见建模" href="/posts/joi2015ho_d/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/assets/honoka.png" alt="All contributors" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">私たち、輝きたい！</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                30
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                35
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81%E6%A8%A1%E5%9E%8B"><span class="toc-text">网络流模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81%E6%9C%80%E5%B0%8F%E5%89%B2"><span class="toc-text">最大流最小割</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%89%B2%E6%A0%91"><span class="toc-text">最小割树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gomory-Hu-%E7%AE%97%E6%B3%95"><span class="toc-text">Gomory-Hu 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83-%E4%BE%8B%E9%A2%98"><span class="toc-text">参考&amp;例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE%E6%9C%80%E5%B0%8F%E5%89%B2"><span class="toc-text">平面图最小割</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="toc-text">平面图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%9B%BE"><span class="toc-text">对偶图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%9B%BE%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-text">对偶图的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83-%E4%BE%8B%E9%A2%98-1"><span class="toc-text">参考&amp;例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B9%E7%94%A8%E6%B5%81"><span class="toc-text">费用流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSP-%E7%AE%97%E6%B3%95"><span class="toc-text">SSP 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83-%E4%BE%8B%E9%A2%98-2"><span class="toc-text">参考&amp;例题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E8%B4%9F%E5%9C%88%E7%9A%84%E8%B4%B9%E7%94%A8%E6%B5%81"><span class="toc-text">有负圈的费用流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%BB%BA%E6%A8%A1"><span class="toc-text">上下界建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-text">无源汇上下界可行流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-text">有源汇上下界可行流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%BA%90%E6%B1%87%E4%B8%8A%E4%B8%8B%E7%95%8C%E6%9C%80%E5%A4%A7-%E5%B0%8F%E6%B5%81"><span class="toc-text">有源汇上下界最大&#x2F;小流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="toc-text">最大流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%B5%81"><span class="toc-text">最小流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="toc-text">例题</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98"><span class="toc-text">经典问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="toc-text">二分图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="toc-text">二分图最大匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96"><span class="toc-text">二分图最小点覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="toc-text">二分图最大独立集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96%E4%B8%8E%E9%93%BE%E8%A6%86%E7%9B%96"><span class="toc-text">路径覆盖与链覆盖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="toc-text">DAG 最小路径覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG-%E6%9C%80%E5%B0%8F%E9%93%BE%E8%A6%86%E7%9B%96"><span class="toc-text">DAG 最小链覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG-%E6%9C%80%E9%95%BF%E5%8F%8D%E9%93%BE"><span class="toc-text">DAG 最长反链</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%9D%83%E9%97%AD%E5%90%88%E5%AD%90%E5%9B%BE"><span class="toc-text">最大权闭合子图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-2"><span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%AF%86%E5%BA%A6%E5%AD%90%E5%9B%BE"><span class="toc-text">最大密度子图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-3"><span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E5%BB%BA%E6%A8%A1"><span class="toc-text">各种建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E7%82%B9"><span class="toc-text">拆点</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/atcoder/" style="font-size: 0.73em;">atcoder</a> <a href="/tags/dsu-on-tree/" style="font-size: 0.6em;">dsu on tree</a> <a href="/tags/prufer-%E5%BA%8F%E5%88%97/" style="font-size: 0.6em;">prufer 序列</a> <a href="/tags/%E4%BB%99%E4%BA%BA%E6%8E%8C/" style="font-size: 0.6em;">仙人掌</a> <a href="/tags/%E5%88%86%E5%9D%97/" style="font-size: 0.6em;">分块</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 0.6em;">可持久化</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%95%B0/" style="font-size: 0.6em;">可持久化线段数</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 0.6em;">可持久化线段树</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 0.67em;">图论</a> <a href="/tags/%E5%9C%86%E6%96%B9%E6%A0%91/" style="font-size: 0.6em;">圆方树</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 0.8em;">学习笔记</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AC%94%E8%AE%B0/" style="font-size: 0.6em;">学习笔记笔记</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" style="font-size: 0.67em;">平衡树</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%90%88%E5%B9%B6/" style="font-size: 0.6em;">平衡树合并</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 0.67em;">并查集</a> <a href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A/" style="font-size: 0.67em;">强连通</a> <a href="/tags/%E6%89%AB%E6%8F%8F%E7%BA%BF/" style="font-size: 0.6em;">扫描线</a> <a href="/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/" style="font-size: 0.6em;">整体二分</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/P10656/"><i class="fa fa-book"></i> P10656 题解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/%E7%A5%9DAqours%E4%B9%9D%E5%91%A8%E5%B9%B4/"><i class="fa fa-book"></i> 祝 Aqours 九周年</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/prufer%E5%BA%8F%E5%88%97/"><i class="fa fa-book"></i> prufer 序列</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/P9989/"><i class="fa fa-book"></i> P9989 题解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/P5494/"><i class="fa fa-book"></i> P5494 题解 & 平衡树合并</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 All contributors 版权所有.</li>
+                            <li>本站已在风雨中飘摇<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 <a href="https://github.com/Candinya/Kratos-Rebirth/graphs/contributors" target="_blank">All contributors</a> 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                            <div>
+                                
+                                    <li>由 <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> 强力驱动</li>
+                                
+                                    <li>在 <a href="https://github.io" target="_blank">Github Pages</a> 暖心托管</li>
+                                
+                            </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+
+
+
+<!-- 额外的追加注入项 -->
+
+    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: !0 }, { left: "$", right: "$", display: !1 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setInterval((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

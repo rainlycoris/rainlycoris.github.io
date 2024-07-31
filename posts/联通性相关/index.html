@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+    <link rel="icon" href="/assets/favicon.png">
+  
+  
+  <title>联通性相关 | </title>
+  <link rel="canonical" href="https://krt.moe/posts/%E8%81%94%E9%80%9A%E6%80%A7%E7%9B%B8%E5%85%B3/">
+  <meta name="author" content="DaydreamWarrior" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="图论, 学习笔记, 强连通, 点双连通, 边双连通" />
+  
+  <meta name="description" content="发现这部分学的最烂，稍微整理下。 强连通分量定义强连通的定义：有向图 $G$ 强连通，当且仅当 $G$ 的任意两个节点联通。 强连通分量（Strongly Connected Components，SCC）的定义是：极大的强连通子图。 Tarjan 算法DFS 生成树有向图的 DFS 生成树主要有 $4$ 种边：  树边：是搜索时找到一个未访问的结点形成的边。  返祖边：是搜索时找到自己的祖先形成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="联通性相关">
+<meta property="og:url" content="https://krt.moe/posts/%E8%81%94%E9%80%9A%E6%80%A7%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="发现这部分学的最烂，稍微整理下。 强连通分量定义强连通的定义：有向图 $G$ 强连通，当且仅当 $G$ 的任意两个节点联通。 强连通分量（Strongly Connected Components，SCC）的定义是：极大的强连通子图。 Tarjan 算法DFS 生成树有向图的 DFS 生成树主要有 $4$ 种边：  树边：是搜索时找到一个未访问的结点形成的边。  返祖边：是搜索时找到自己的祖先形成">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-03-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-31T14:51:26.625Z">
+<meta property="article:author" content="All contributors">
+<meta property="article:tag" content="强连通">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="图论">
+<meta property="article:tag" content="点双连通">
+<meta property="article:tag" content="边双连通">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/assets/chika_you.webp');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('/assets/mari_you.webp');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+    <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=Noto+Serif+SC&display=swap')</style><style>body { font-family: 'Noto Serif SC' }</style>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    <li>
+                                        
+                                            <a href="/">
+                                        
+                                            
+                                                <i class="fa fa-home"></i>
+                                            
+                                            首页
+                                        </a>
+                                        
+                                    </li>
+                                
+                                    <li>
+                                        
+                                            <a href="/archives/">
+                                        
+                                            
+                                                <i class="fa fa-file"></i>
+                                            
+                                            档案馆
+                                        </a>
+                                        
+                                    </li>
+                                
+                                    <li>
+                                        
+                                            <a>
+                                        
+                                            
+                                                <i class="fa fa-link"></i>
+                                            
+                                            链接
+                                        </a>
+                                        
+                                            <ul class="sub-menu">
+                                                
+                                                    <li>
+                                                        <a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">
+                                                            
+                                                                <i class="fa fa-code"></i>
+                                                            
+                                                            代码仓库
+                                                        </a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a target="_blank" rel="noopener" href="https://wiki.krt.moe">
+                                                            
+                                                                <i class="fa fa-book"></i>
+                                                            
+                                                            项目文档
+                                                        </a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                    </li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/"></a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2></h2> <br />
+                        <span>だから僕らは がんばって挑戦だよね</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://krt.moe/posts/%E8%81%94%E9%80%9A%E6%80%A7%E7%9B%B8%E5%85%B3/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">联通性相关</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2023-03-12T16:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-03-13</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">DaydreamWarrior</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~5.04K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-history"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1722437486625"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">强连通分量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">Tarjan 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DFS-%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.2.1.</span> <span class="toc-text">DFS 生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFS-%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%E4%B9%8B%E5%89%8D%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.2.2.</span> <span class="toc-text">DFS 生成树与强连通分量之前的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-number">1.2.3.</span> <span class="toc-text">Tarjan 算法求强连通分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.4.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%B2%E7%82%B9%E5%92%8C%E6%A1%A5"><span class="toc-number">2.</span> <span class="toc-text">割点和桥</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E5%89%B2%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">Tarjan 算法求割点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E5%89%B2%E8%BE%B9"><span class="toc-number">2.3.</span> <span class="toc-text">Tarjan 算法求割边</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">双连通分量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E7%82%B9%E5%8F%8C%E8%BF%9E%E9%80%9A"><span class="toc-number">3.2.</span> <span class="toc-text">Tarjan 算法求点双连通</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-3"><span class="toc-number">3.2.1.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A"><span class="toc-number">3.3.</span> <span class="toc-text">Tarjan 算法求边双连通</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-4"><span class="toc-number">3.3.1.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><p>发现这部分学的最烂，稍微整理下。</p>
+<h1 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>强连通的定义：有向图 $G$ 强连通，当且仅当 $G$ 的任意两个节点联通。</p>
+<p>强连通分量（Strongly Connected Components，SCC）的定义是：极大的强连通子图。</p>
+<h2 id="Tarjan-算法"><a href="#Tarjan-算法" class="headerlink" title="Tarjan 算法"></a>Tarjan 算法</h2><h3 id="DFS-生成树"><a href="#DFS-生成树" class="headerlink" title="DFS 生成树"></a>DFS 生成树</h3><p>有向图的 DFS 生成树主要有 $4$ 种边：</p>
+<ol>
+<li><p>树边：是搜索时找到一个未访问的结点形成的边。</p>
+</li>
+<li><p>返祖边：是搜索时找到自己的祖先形成的边。</p>
+</li>
+<li><p>横叉边：是搜索时找到已遍历过的结点形成的边，并且这个节点不是自己的祖先和子树中的结点。</p>
+</li>
+<li><p>前向边：是搜索时找到子树中的结点形成的边。</p>
+</li>
+</ol>
+<h3 id="DFS-生成树与强连通分量之前的关系"><a href="#DFS-生成树与强连通分量之前的关系" class="headerlink" title="DFS 生成树与强连通分量之前的关系"></a>DFS 生成树与强连通分量之前的关系</h3><p>如果 $u$ 是某个强连通分量在 DFS 生成树里搜到的第一个结点，这个强连通分量其它的结点一定在 $u$ 的子树里。结点 $u$ 被称为这个强连通分量的根。</p>
+<p>证明：假设强连通分量其它的结点不都在 $u$ 的子树里，那么不在的那些结点一定与 $u$ 连有返祖边或者前向边，返祖边或者前向边相连的点都是遍历过的，所以该假设不成立。</p>
+<h3 id="Tarjan-算法求强连通分量"><a href="#Tarjan-算法求强连通分量" class="headerlink" title="Tarjan 算法求强连通分量"></a>Tarjan 算法求强连通分量</h3><p>维护对于每个结点 $u$ 维护两个值：</p>
+<ul>
+<li>$dfn_u$ 表示结点 $u$ 是第几个被搜到的。</li>
+<li>$low_u$ 表示在 $u$ 的子树中能够回溯到的最早出现在栈中的结点。具体的，$low_u$ 为以 $u$ 为根的子树的和子树中通过一条不在搜索树上的边能到达的结点的 $dfn$ 的最小值。</li>
+</ul>
+<p>按照深度优先搜索依次搜索每个值，对于每个值维护 $dfn$ 和 $low$。每找到一个强连通分量，就将这个强连通分量全部出栈（该强连通分量的所有元素都在栈顶）。在搜索过程中对于 $u$ 与其相连的结点 $v$（$v$ 不是 $u$ 的父亲）：</p>
+<ul>
+<li>$v$ 未被访问过：继续对 $v$ 进行搜索，用 $low_v$ 更新 $low_u$，因为 $v$ 能够回溯到的点 $u$ 一定也能回溯到。</li>
+<li>$v$ 被访问过且在栈中：根据定义，用 $dfn_v$ 更新 $low_u$。</li>
+<li>$v$ 被访问过且不在栈中：说明 $v$ 已经被处理，不做更新。</li>
+</ul>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> dfn[N],low[N],idx;</span><br><span class="line"><span class="type">int</span> sta[N],top;</span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">    dfn[u] = low[u] = ++idx;</span><br><span class="line">    sta[++top] = u;</span><br><span class="line">    vis[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> v:g[u])&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])&#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(v);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],low[v]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(vis[v])</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(dfn[u]==low[u])&#123;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            vis[sta[top]] = <span class="literal">false</span>;</span><br><span class="line">        &#125;<span class="keyword">while</span>(sta[top--]!=u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="割点和桥"><a href="#割点和桥" class="headerlink" title="割点和桥"></a>割点和桥</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>对于一张无向图，如果删去一个点后这张图的联通分量增加了，那么这个点是这张图的割点。</p>
+<p>对于一张无向图，如果删去一条边后这张图的联通分量增加了，那么这条边是这张图的桥。</p>
+<h2 id="Tarjan-算法求割点"><a href="#Tarjan-算法求割点" class="headerlink" title="Tarjan 算法求割点"></a>Tarjan 算法求割点</h2><p>dfs 记录时间戳 $low$，同时记录每个结点不经过父亲能到达的结点最小的时间戳 $low$。</p>
+<p>判断一个点 $u$ 是割点的依据是存在儿子$v$ 满足 $low_v \leq dfn_u$。因为如果 $low_v \geq dfn_u$，说明 $v$ 一定有一条返祖边或者横叉边，删掉 $u$ 之后 $v$ 仍然与 $u$ 的父亲联通，否则删到 $u$ 之后 $v$ 不连通，出现新的联通分量。</p>
+<p>这个判定唯一不适用于 $u$ 是根节点。因为根节点的儿子不可能与根节点的父亲联通（根节点没有父亲），所以如果根节点是割点，那么在 dfs 树中存在两个以上的儿子就一定是割点，删掉根结点后根结点的子树一定不连通。</p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> dfn[N],low[N],idx;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; g[N];</span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> father)</span></span>&#123;</span><br><span class="line">    dfn[u] = low[u] = ++idx;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:g[u])&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])&#123;</span><br><span class="line">            cnt++;</span><br><span class="line">            <span class="built_in">dfs</span>(v,u);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],low[v]);</span><br><span class="line">            <span class="keyword">if</span>(father&amp;&amp;dfn[u]&lt;=low[v])</span><br><span class="line">                vis[u] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(v!=father)</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!father&amp;&amp;cnt&gt;<span class="number">1</span>)</span><br><span class="line">        vis[u] = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tarjan-算法求割边"><a href="#Tarjan-算法求割边" class="headerlink" title="Tarjan 算法求割边"></a>Tarjan 算法求割边</h2><p>和求割点差不多，不需要特殊处理根节点。</p>
+<p>$low_u$ 为不经过 $u-v$ 这条边能到达的结点的最小时间戳。当 $low_v &gt; dfn_u$ 时，$u-v$ 这条边是割边。<br>因为 $low_v &#x3D; low_u$ 就证明 $v$ 可以通过别的边到达 $u$。</p>
+<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> h[N],ne[M],e[M],idx;</span><br><span class="line"><span class="type">int</span> dfn[N],low[N],cnt;</span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> father)</span></span>&#123;</span><br><span class="line">    dfn[u] = low[u] = ++cnt;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=h[u];~k;k=ne[k])&#123;</span><br><span class="line">        <span class="type">int</span> v = e[k];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])&#123;</span><br><span class="line">            <span class="built_in">dfs</span>(v,u);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],low[v]);</span><br><span class="line">            <span class="keyword">if</span>(dfn[u]&lt;low[v])</span><br><span class="line">                vis[k] = vis[k^<span class="number">1</span>] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(v!=father)</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="双连通分量"><a href="#双连通分量" class="headerlink" title="双连通分量"></a>双连通分量</h1><h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><p>在一张无向图中，对于两个点 $u,v$，如果删去任意一条边都不能使其不连通，那么 $u$ 和 $v$ 是 <strong>边双连通</strong> 的。</p>
+<p>在一张无向图中，对于两个点 $u,v$，如果删去任意一个点都不能使其不连通，那么 $u$ 和 $v$ 是 <strong>点双连通</strong> 的。</p>
+<p>边双连通具有传递性，点双连通没有。</p>
+<h2 id="Tarjan-算法求点双连通"><a href="#Tarjan-算法求点双连通" class="headerlink" title="Tarjan 算法求点双连通"></a>Tarjan 算法求点双连通</h2><p>与边双连通不同，一个点可能属于多个点双连通分量。</p>
+<p>除了独立点，所有点双连通都有两个以上的点构成。我们用栈维护点，当遇到割点或根节点时，将子树内目前不属于其它点双的非割点或在子树中的割点归到一个新的点双。注意这个点可能还是与其它点双的公共点，所以不能将其出栈。</p>
+<h3 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; ans;</span><br><span class="line"><span class="type">int</span> dfn[N],low[N],idx;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; g[N];</span><br><span class="line"><span class="type">int</span> stk[N],tp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> father)</span></span>&#123;</span><br><span class="line">    dfn[u] = low[u] = ++idx;</span><br><span class="line">    <span class="keyword">if</span>(g[u].<span class="built_in">empty</span>())&#123;</span><br><span class="line">        ans.<span class="built_in">push_back</span>(&#123;u&#125;);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    stk[++tp] = u;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:g[u])&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])&#123;</span><br><span class="line">            <span class="built_in">dfs</span>(v,u);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],low[v]);</span><br><span class="line">            <span class="keyword">if</span>(dfn[u]&lt;=low[v])&#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(&#123;&#125;);</span><br><span class="line">                <span class="keyword">do</span>&#123;</span><br><span class="line">                    ans.<span class="built_in">back</span>().<span class="built_in">push_back</span>(stk[tp--]);</span><br><span class="line">                &#125;<span class="keyword">while</span>(stk[tp+<span class="number">1</span>]!=v);</span><br><span class="line">                ans.<span class="built_in">back</span>().<span class="built_in">push_back</span>(u);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(v!=father)</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tarjan-算法求边双连通"><a href="#Tarjan-算法求边双连通" class="headerlink" title="Tarjan 算法求边双连通"></a>Tarjan 算法求边双连通</h2><p>删掉割边所剩下的就是边双连通分量。割边用 Tarjan 求即可。</p>
+<h3 id="代码实现-4"><a href="#代码实现-4" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> h[N],ne[M],e[M],idx;</span><br><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; ans;</span><br><span class="line"><span class="type">int</span> dfn[N],low[N],cnt;</span><br><span class="line"><span class="type">bool</span> b[M],vis[N];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> father)</span></span>&#123;</span><br><span class="line">    dfn[u] = low[u] = ++cnt;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=h[u];~k;k=ne[k])&#123;</span><br><span class="line">        <span class="type">int</span> v = e[k];</span><br><span class="line">        <span class="keyword">if</span>(!dfn[v])&#123;</span><br><span class="line">            <span class="built_in">dfs</span>(v,u);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],low[v]);</span><br><span class="line">            <span class="keyword">if</span>(dfn[u]&lt;low[v])</span><br><span class="line">                vis[k] = vis[k^<span class="number">1</span>] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(v!=father)</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u],dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">    vis[u] = <span class="literal">true</span>;</span><br><span class="line">    ans.<span class="built_in">back</span>().<span class="built_in">push_back</span>(u);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=h[u];~k;k=ne[k])&#123;</span><br><span class="line">        <span class="type">int</span> v = e[k];</span><br><span class="line">        <span class="keyword">if</span>(vis[v]||b[k])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="keyword">if</span>(!dfn[k])</span><br><span class="line">            <span class="built_in">dfs</span>(k,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="keyword">if</span>(!vis[k])&#123;</span><br><span class="line">            ans.<span class="built_in">push_back</span>(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">            <span class="built_in">dfs</span>(k);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <span itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</span>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a>, <a class="tag-none-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a>, <a class="tag-none-link" href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A/" rel="tag">强连通</a>, <a class="tag-none-link" href="/tags/%E7%82%B9%E5%8F%8C%E8%BF%9E%E9%80%9A/" rel="tag">点双连通</a>, <a class="tag-none-link" href="/tags/%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A/" rel="tag">边双连通</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-07-31T14:51:26.625Z" itemprop="dateModified">最后编辑：2024-07-31</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 根号数据结构" href="/posts/根号数据结构/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" ARC158C 题解" href="/posts/AT_arc158_c/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/assets/honoka.png" alt="All contributors" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">私たち、輝きたい！</p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                30
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                35
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-text">强连通分量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95"><span class="toc-text">Tarjan 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DFS-%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">DFS 生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFS-%E7%94%9F%E6%88%90%E6%A0%91%E4%B8%8E%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%E4%B9%8B%E5%89%8D%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">DFS 生成树与强连通分量之前的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-text">Tarjan 算法求强连通分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%B2%E7%82%B9%E5%92%8C%E6%A1%A5"><span class="toc-text">割点和桥</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E5%89%B2%E7%82%B9"><span class="toc-text">Tarjan 算法求割点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E5%89%B2%E8%BE%B9"><span class="toc-text">Tarjan 算法求割边</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2"><span class="toc-text">代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="toc-text">双连通分量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E7%82%B9%E5%8F%8C%E8%BF%9E%E9%80%9A"><span class="toc-text">Tarjan 算法求点双连通</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-3"><span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tarjan-%E7%AE%97%E6%B3%95%E6%B1%82%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A"><span class="toc-text">Tarjan 算法求边双连通</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-4"><span class="toc-text">代码实现</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/atcoder/" style="font-size: 0.73em;">atcoder</a> <a href="/tags/dsu-on-tree/" style="font-size: 0.6em;">dsu on tree</a> <a href="/tags/prufer-%E5%BA%8F%E5%88%97/" style="font-size: 0.6em;">prufer 序列</a> <a href="/tags/%E4%BB%99%E4%BA%BA%E6%8E%8C/" style="font-size: 0.6em;">仙人掌</a> <a href="/tags/%E5%88%86%E5%9D%97/" style="font-size: 0.6em;">分块</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 0.6em;">可持久化</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%95%B0/" style="font-size: 0.6em;">可持久化线段数</a> <a href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 0.6em;">可持久化线段树</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 0.67em;">图论</a> <a href="/tags/%E5%9C%86%E6%96%B9%E6%A0%91/" style="font-size: 0.6em;">圆方树</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 0.8em;">学习笔记</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%AC%94%E8%AE%B0/" style="font-size: 0.6em;">学习笔记笔记</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" style="font-size: 0.67em;">平衡树</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%90%88%E5%B9%B6/" style="font-size: 0.6em;">平衡树合并</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 0.67em;">并查集</a> <a href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A/" style="font-size: 0.67em;">强连通</a> <a href="/tags/%E6%89%AB%E6%8F%8F%E7%BA%BF/" style="font-size: 0.6em;">扫描线</a> <a href="/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/" style="font-size: 0.6em;">整体二分</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/posts/P10656/"><i class="fa fa-book"></i> P10656 题解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/%E7%A5%9DAqours%E4%B9%9D%E5%91%A8%E5%B9%B4/"><i class="fa fa-book"></i> 祝 Aqours 九周年</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/prufer%E5%BA%8F%E5%88%97/"><i class="fa fa-book"></i> prufer 序列</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/P9989/"><i class="fa fa-book"></i> P9989 题解</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/posts/P5494/"><i class="fa fa-book"></i> P5494 题解 & 平衡树合并</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 All contributors 版权所有.</li>
+                            <li>本站已在风雨中飘摇<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 <a href="https://github.com/Candinya/Kratos-Rebirth/graphs/contributors" target="_blank">All contributors</a> 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                            <div>
+                                
+                                    <li>由 <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> 强力驱动</li>
+                                
+                                    <li>在 <a href="https://github.io" target="_blank">Github Pages</a> 暖心托管</li>
+                                
+                            </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+
+
+
+<!-- 额外的追加注入项 -->
+
+    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: !0 }, { left: "$", right: "$", display: !1 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setInterval((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>
