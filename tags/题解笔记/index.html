@@ -251,8 +251,9 @@
                     <p itemProp="description">
                         
                             “生きてく意味があると感じるよ…確かに！”——《Nameless Love Song》
-分析首先写个 $n^2$ dp 转移
-$$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
+ 分析
+首先写个 n2n^2n2 dp 转移
+fi&#x3D;min⁡j&#x3D;1i−1(fj+∑k&#x3D;j+1i(xi−xk)pk)+ci&#x3D;min⁡j&#x3D;1i−1(f...
                         
                     </p>
                 </div>
@@ -307,7 +308,8 @@ $$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
                     <p itemProp="description">
                         
                             “这样的我会被谁拯救吗　你发现了吧” —— 《月光掌》
-分析设第 $i$ 次撤销操作要撤销的是 $j$，那么 $i$ 到 $j$ 的操作中不存在优先级比 $j$ 小的，所以 $j$ 到 $i$ 的操作不会在没撤销 $i$ 的情况下被撤...
+ 分析
+设第 iii 次撤销操作要撤销的是 jjj，那么 iii 到 jjj 的操作中不存在优先级比 jjj 小的，所以 jjj 到 iii 的操作不会在没撤销 iii 的情况下...
                         
                     </p>
                 </div>
@@ -362,8 +364,9 @@ $$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
                     <p itemProp="description">
                         
                             “并没有 不一样 为何感到悲伤”   —— 《尘降》
-分析首先把图反着跑，这样总通行时间除以 $2$ 就变成了后续时间都除以 $2$，当前总通过时间为 $0$ 就变成了后续时间都为 $0$。
-然后把一个点拆开成 $K+2$ 个，第 $...
+ 分析
+首先把图反着跑，这样总通行时间除以 222 就变成了后续时间都除以 222，当前总通过时间为 000 就变成了后续时间都为 000。
+然后把一个点拆开成 K+2K+2K+2...
                         
                     </p>
                 </div>
@@ -417,12 +420,13 @@ $$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
                 <div class="kratos-entry-content">
                     <p itemProp="description">
                         
-                            分析枚举第一名，假设以后的比赛该名玩家都获胜，然后判定是否合法。
+                             分析
+枚举第一名，假设以后的比赛该名玩家都获胜，然后判定是否合法。
 数据范围很网络流，考虑最大流，流量代表得分，然后是建图：
 
-源点和每场比赛连容量为 $1$ 的边
+源点和每场比赛连容量为 111 的边
 比赛如果有胜负就向胜者连边，否则就向参与比赛的两个人连边
-设第一名的得...
+设第一名...
                         
                     </p>
                 </div>
@@ -477,8 +481,9 @@ $$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
                     <p itemProp="description">
                         
                             “请告诉我为何心不停的跳动　这颗心究竟装着什么” —— 《人偶之梦》
-分析注意到 $p_i&lt;p_j$ 则 $c_i\leq c_j$，存在偏序关系。
-一个贪心的想法是，按照订单的 $v$ 从大到小，每次找到大于 $d$ 的最小的...
+ 分析
+注意到 pi&lt;pjp_i&lt;p_jpi​&lt;pj​ 则 ci≤cjc_i\leq c_jci​≤cj​，存在偏序关系。
+一个贪心的想法是，按照...
                         
                     </p>
                 </div>
@@ -533,8 +538,9 @@ $$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
                     <p itemProp="description">
                         
                             “遥か月を目指した 今日の空は 彼方西に流れた もう届かないや 届かないや”——《回る空うさぎ》
-分析首先对于每个坐标开一颗平衡树，要维护的东西需要全局取 max，但是自己不能取。
-士气值和团结值在一个点没加进去之前是好算的，直接是坐...
+ 分析
+首先对于每个坐标开一颗平衡树，要维护的东西需要全局取 max，但是自己不能取。
+士气值和团结值在一个点没加进去之前是好算的，直接...
                         
                     </p>
                 </div>
@@ -589,9 +595,12 @@ $$\begin{aligned}f_i&amp;&#x3D;\min_{j&#x3D;1}^{i-1}(f...
                     <p itemProp="description">
                         
                             “生きる熱さを感じたいだけさ”—— 《スリリング・ワンウェイ》
-莫队+值域分块题解题意简述查询区间内出现次数第k小的值的出现次数。
-$1\leq N, M\leq 10^5$
-题目分析这种 $1e5$ 又不带修改的规模容易想到莫队。但...
+ 莫队+值域分块题解
+ 题意简述
+查询区间内出现次数第k小的值的出现次数。
+1≤N,M≤1051\leq N, M\leq 10^51≤N,M≤105
+ 题目分析
+这种 ...
                         
                     </p>
                 </div>
@@ -850,7 +859,7 @@ $1\leq N, M\leq 10^5$
 
 <!-- 额外的追加注入项 -->
 
-    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: !0 }, { left: "$", right: "$", display: !1 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setInterval((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
+    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: 1 }, { left: "$", right: "$", display: 0 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setTimeout((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
 
 
         <script>

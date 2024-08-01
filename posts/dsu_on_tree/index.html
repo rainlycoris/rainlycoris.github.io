@@ -19,12 +19,12 @@
   
     <meta name="keywords" content="dsu on tree, 学习笔记" />
   
-  <meta name="description" content="契约签订完毕，接下来要认真起来了。 简介对于子树查询类问题，大多可以 dfs 序然后上数据结构，不行就树上莫队。 一个方法是 dsu on tree，是一个好写的复杂度 $O(n \log n)$ 离线算法。 过程考虑启发式，对于每个节点找出重子树，然后  递归询问所有轻子树（询问后删除贡献） 递归询问重子树（保留贡献） 加入所有轻子树内节点的贡献  证明对于复杂度，总操作次数为 $n+\sum$">
+  <meta name="description" content="契约签订完毕，接下来要认真起来了。  简介 对于子树查询类问题，大多可以 dfs 序然后上数据结构，不行就树上莫队。 一个方法是 dsu on tree，是一个好写的复杂度 O(nlog⁡n)O(n \log n)O(nlogn) 离线算法。  过程 考虑启发式，对于每个节点找出重子树，然后  递归询问所有轻子树（询问后删除贡献） 递归询问重子树（保留贡献） 加入所有轻子树内节点的贡献   证明">
 <meta property="og:type" content="article">
 <meta property="og:title" content="聊聊 dsu on tree">
 <meta property="og:url" content="https://krt.moe/posts/dsu_on_tree/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="契约签订完毕，接下来要认真起来了。 简介对于子树查询类问题，大多可以 dfs 序然后上数据结构，不行就树上莫队。 一个方法是 dsu on tree，是一个好写的复杂度 $O(n \log n)$ 离线算法。 过程考虑启发式，对于每个节点找出重子树，然后  递归询问所有轻子树（询问后删除贡献） 递归询问重子树（保留贡献） 加入所有轻子树内节点的贡献  证明对于复杂度，总操作次数为 $n+\sum$">
+<meta property="og:description" content="契约签订完毕，接下来要认真起来了。  简介 对于子树查询类问题，大多可以 dfs 序然后上数据结构，不行就树上莫队。 一个方法是 dsu on tree，是一个好写的复杂度 O(nlog⁡n)O(n \log n)O(nlogn) 离线算法。  过程 考虑启发式，对于每个节点找出重子树，然后  递归询问所有轻子树（询问后删除贡献） 递归询问重子树（保留贡献） 加入所有轻子树内节点的贡献   证明">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-10-30T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-07-31T14:55:07.055Z">
@@ -218,7 +218,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            861
+                            922
                         
                         字
                     </li>
@@ -237,29 +237,37 @@
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-number">1.2.</span> <span class="toc-text">证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">1.3.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CF600E-Lomsat-gelral"><span class="toc-number">2.1.</span> <span class="toc-text">CF600E Lomsat gelral</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF741D-Arpa%E2%80%99s-letter-marked-tr%E2%80%A6"><span class="toc-number">2.2.</span> <span class="toc-text">CF741D Arpa’s letter-marked tr…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF1767F-Two-Subtrees"><span class="toc-number">2.3.</span> <span class="toc-text">CF1767F Two Subtrees</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text"> 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text"> 过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-number">1.2.</span> <span class="toc-text"> 证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">1.3.</span> <span class="toc-text"> 性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text"> 题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cf600e-lomsat-gelral"><span class="toc-number">2.1.</span> <span class="toc-text"> CF600E Lomsat gelral</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf741d-arpas-letter-marked-tr"><span class="toc-number">2.2.</span> <span class="toc-text"> CF741D Arpa’s letter-marked tr…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf1767f-two-subtrees"><span class="toc-number">2.3.</span> <span class="toc-text"> CF1767F Two Subtrees</span></a></li></ol></li></ol>
                 </div>
             
             <hr />
             <div itemprop="articleBody"><p>契约签订完毕，接下来要认真起来了。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>对于子树查询类问题，大多可以 dfs 序然后上数据结构，不行就树上莫队。</p>
-<p>一个方法是 dsu on tree，是一个好写的复杂度 $O(n \log n)$ 离线算法。</p>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>考虑启发式，对于每个节点找出重子树，然后</p>
+<h2 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h2>
+<p>对于子树查询类问题，大多可以 dfs 序然后上数据结构，不行就树上莫队。</p>
+<p>一个方法是 dsu on tree，是一个好写的复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 离线算法。</p>
+<h3 id="过程"><a class="markdownIt-Anchor" href="#过程"></a> 过程</h3>
+<p>考虑启发式，对于每个节点找出重子树，然后</p>
 <ul>
 <li>递归询问所有轻子树（询问后删除贡献）</li>
 <li>递归询问重子树（保留贡献）</li>
 <li>加入所有轻子树内节点的贡献</li>
 </ul>
-<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>对于复杂度，总操作次数为 $n+\sum$ 轻子树大小。类似于树链剖分，每个点被多操作一次就代表成为了一次轻子树，而轻子树的父亲的子树大小至少为轻子树的 $2$ 倍，所以每个点至多被操作 $\log$ 次。</p>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>加入重儿子之前的全局所有贡献都是被删掉了的。</p>
-<p>这意味着 dsu on tree 和 $O(n^2)$ 去统计在贡献处理上没有任何区别，也意味着回滚莫队能做的都能做。</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="CF600E-Lomsat-gelral"><a href="#CF600E-Lomsat-gelral" class="headerlink" title="CF600E Lomsat gelral"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/600/E">CF600E Lomsat gelral</a></h3><p>直接 dsu on tree，求众数和可以正常做，撤销的时候不仅要把计数的数组撤销，还要把最多出现次数和众数和撤销，后者也好办，操作前记录一个撤销的时候直接赋值就好了。</p>
-<h3 id="CF741D-Arpa’s-letter-marked-tr…"><a href="#CF741D-Arpa’s-letter-marked-tr…" class="headerlink" title="CF741D Arpa’s letter-marked tr…"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/600/E">CF741D Arpa’s letter-marked tr…</a></h3><p>排序后能是回文串要么每个字符都是偶数，或者只有一个为奇数。</p>
-<p>字符只有 $22$ 个，可以记录某些字符出现奇数的最长长度，然后类似于点分治去统计。</p>
+<h3 id="证明"><a class="markdownIt-Anchor" href="#证明"></a> 证明</h3>
+<p>对于复杂度，总操作次数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mo>∑</mo></mrow><annotation encoding="application/x-tex">n+\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span> 轻子树大小。类似于树链剖分，每个点被多操作一次就代表成为了一次轻子树，而轻子树的父亲的子树大小至少为轻子树的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span> 倍，所以每个点至多被操作 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 次。</p>
+<h3 id="性质"><a class="markdownIt-Anchor" href="#性质"></a> 性质</h3>
+<p>加入重儿子之前的全局所有贡献都是被删掉了的。</p>
+<p>这意味着 dsu on tree 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 去统计在贡献处理上没有任何区别，也意味着回滚莫队能做的都能做。</p>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<h3 id="cf600e-lomsat-gelral"><a class="markdownIt-Anchor" href="#cf600e-lomsat-gelral"></a> <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/600/E">CF600E Lomsat gelral</a></h3>
+<p>直接 dsu on tree，求众数和可以正常做，撤销的时候不仅要把计数的数组撤销，还要把最多出现次数和众数和撤销，后者也好办，操作前记录一个撤销的时候直接赋值就好了。</p>
+<h3 id="cf741d-arpas-letter-marked-tr"><a class="markdownIt-Anchor" href="#cf741d-arpas-letter-marked-tr"></a> <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/600/E">CF741D Arpa’s letter-marked tr…</a></h3>
+<p>排序后能是回文串要么每个字符都是偶数，或者只有一个为奇数。</p>
+<p>字符只有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>22</mn></mrow><annotation encoding="application/x-tex">22</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">2</span></span></span></span> 个，可以记录某些字符出现奇数的最长长度，然后类似于点分治去统计。</p>
 <p>把这个过程按照 dsu on tree 做就好了。</p>
-<h3 id="CF1767F-Two-Subtrees"><a href="#CF1767F-Two-Subtrees" class="headerlink" title="CF1767F Two Subtrees"></a><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1767/F">CF1767F Two Subtrees</a></h3><p>如果只询问一个子树，那么就是 dsu on tree 板子。</p>
-<p>考虑把 __dsu on tree 序列化__，先加入轻子树，再加入重子树，再加入根。</p>
-<p>当扫描这个序列的所有子树时，轻子树的移动后会直接被删掉，重子树移动后再查询根，重子树会被保留同时加入所有轻子树，扫描的复杂度为 $O(n \log n)$。</p>
+<h3 id="cf1767f-two-subtrees"><a class="markdownIt-Anchor" href="#cf1767f-two-subtrees"></a> <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1767/F">CF1767F Two Subtrees</a></h3>
+<p>如果只询问一个子树，那么就是 dsu on tree 板子。</p>
+<p>考虑把 <strong>dsu on tree 序列化</strong>，先加入轻子树，再加入重子树，再加入根。</p>
+<p>当扫描这个序列的所有子树时，轻子树的移动后会直接被删掉，重子树移动后再查询根，重子树会被保留同时加入所有轻子树，扫描的复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>。</p>
 <p>直接在这个序列上莫队，区间的左右端点为询问的两颗子树。</p>
 <p>子树询问的区间移动就如果目标区间当前区间无交就当前区间删除然后暴力加入目标区间，否则就就正常移动左右端点。</p>
 </div>
@@ -364,7 +372,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-text">证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text">题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CF600E-Lomsat-gelral"><span class="toc-text">CF600E Lomsat gelral</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF741D-Arpa%E2%80%99s-letter-marked-tr%E2%80%A6"><span class="toc-text">CF741D Arpa’s letter-marked tr…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CF1767F-Two-Subtrees"><span class="toc-text">CF1767F Two Subtrees</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text"> 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text"> 过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-text"> 证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-text"> 性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text"> 题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cf600e-lomsat-gelral"><span class="toc-text"> CF600E Lomsat gelral</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf741d-arpas-letter-marked-tr"><span class="toc-text"> CF741D Arpa’s letter-marked tr…</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf1767f-two-subtrees"><span class="toc-text"> CF1767F Two Subtrees</span></a></li></ol></li></ol>
     </div>
 </aside>
                 
@@ -541,7 +549,7 @@
 
 <!-- 额外的追加注入项 -->
 
-    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: !0 }, { left: "$", right: "$", display: !1 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setInterval((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
+    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: 1 }, { left: "$", right: "$", display: 0 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setTimeout((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
 
 
         <script>

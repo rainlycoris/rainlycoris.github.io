@@ -231,8 +231,9 @@
                     <p itemProp="description">
                         
                             夜空是否全然知晓？
-高维前缀和&#x2F;sosdp计算高维前缀和可以不用容斥，而是对每一维分别做前缀和，复杂度为 $O(kn)$，其中 $k$ 是维度。
-对于子集求和问题，相当于二进制下的 $1$ 可以选 $0$ 或 $1$，$0$...
+ 高维前缀和&#x2F;sosdp
+计算高维前缀和可以不用容斥，而是对每一维分别做前缀和，复杂度为 O(kn)O(kn)O(kn)，其中 kkk 是维度。
+对于子集求和问题，相当于二进制下的 111 可以选 000 或 11...
                         
                     </p>
                 </div>
@@ -287,12 +288,13 @@
                     <p itemProp="description">
                         
                             浅浅的总结一下简单情况。
-适用范围可以使用整体二分解决的题目需要满足以下性质：
+ 适用范围
+可以使用整体二分解决的题目需要满足以下性质：
 
 询问的答案具有可二分性
 修改对判定答案的贡献互相独立，修改之间互不影响效果
 修改如果对判定答案有贡献，则贡献为一确定的与判定标准无关的值
-贡献满足交换律...
+贡献满足交...
                         
                     </p>
                 </div>
@@ -347,7 +349,8 @@
                     <p itemProp="description">
                         
                             “这样的我会被谁拯救吗　你发现了吧” —— 《月光掌》
-分析设第 $i$ 次撤销操作要撤销的是 $j$，那么 $i$ 到 $j$ 的操作中不存在优先级比 $j$ 小的，所以 $j$ 到 $i$ 的操作不会在没撤销 $i$ 的情况下被撤...
+ 分析
+设第 iii 次撤销操作要撤销的是 jjj，那么 iii 到 jjj 的操作中不存在优先级比 jjj 小的，所以 jjj 到 iii 的操作不会在没撤销 iii 的情况下...
                         
                     </p>
                 </div>
@@ -402,9 +405,10 @@
                     <p itemProp="description">
                         
                             你眼中倒映的世界 一瞬永远 —— 《梦语》
-分析首先答案有单调性，考虑二分。
+ 分析
+首先答案有单调性，考虑二分。
 然后每次留下来的构成一颗三叉树，父亲是儿子的中位数，考虑树形 dp。
-上很经典的中位数套路，设二分的值为 $v$，$\geq v$ 的 $g_v$ 为 $1...
+上很经典的中位数套路，设二分的值为 vvv，≥v\geq v≥v 的 gvg_vg...
                         
                     </p>
                 </div>
@@ -460,22 +464,26 @@
                         
                             本文主要讲建图方法，定义和证明内容较少。
 正好网络流二十四题做完了整理下。
-目录
+ 目录
+
 网络流模型
+
 最大流最小割
+
 最小割树
 平面图最小割
 
 
 费用流
+
 SSP 算法
 有负圈的费用流
 
 
 上下界建模
+
 无源汇上下界可行流
-有源汇上下界可行流
-有源...
+有源汇上下界...
                         
                     </p>
                 </div>
@@ -530,8 +538,9 @@ SSP 算法
                     <p itemProp="description">
                         
                             “并没有 不一样 为何感到悲伤”   —— 《尘降》
-分析首先把图反着跑，这样总通行时间除以 $2$ 就变成了后续时间都除以 $2$，当前总通过时间为 $0$ 就变成了后续时间都为 $0$。
-然后把一个点拆开成 $K+2$ 个，第 $...
+ 分析
+首先把图反着跑，这样总通行时间除以 222 就变成了后续时间都除以 222，当前总通过时间为 000 就变成了后续时间都为 000。
+然后把一个点拆开成 K+2K+2K+2...
                         
                     </p>
                 </div>
@@ -585,12 +594,13 @@ SSP 算法
                 <div class="kratos-entry-content">
                     <p itemProp="description">
                         
-                            分析枚举第一名，假设以后的比赛该名玩家都获胜，然后判定是否合法。
+                             分析
+枚举第一名，假设以后的比赛该名玩家都获胜，然后判定是否合法。
 数据范围很网络流，考虑最大流，流量代表得分，然后是建图：
 
-源点和每场比赛连容量为 $1$ 的边
+源点和每场比赛连容量为 111 的边
 比赛如果有胜负就向胜者连边，否则就向参与比赛的两个人连边
-设第一名的得...
+设第一名...
                         
                     </p>
                 </div>
@@ -645,8 +655,9 @@ SSP 算法
                     <p itemProp="description">
                         
                             “请告诉我为何心不停的跳动　这颗心究竟装着什么” —— 《人偶之梦》
-分析注意到 $p_i&lt;p_j$ 则 $c_i\leq c_j$，存在偏序关系。
-一个贪心的想法是，按照订单的 $v$ 从大到小，每次找到大于 $d$ 的最小的...
+ 分析
+注意到 pi&lt;pjp_i&lt;p_jpi​&lt;pj​ 则 ci≤cjc_i\leq c_jci​≤cj​，存在偏序关系。
+一个贪心的想法是，按照...
                         
                     </p>
                 </div>
@@ -700,12 +711,15 @@ SSP 算法
                 <div class="kratos-entry-content">
                     <p itemProp="description">
                         
-                            day-?报名被报成线上了，寄寄寄。
-day-?P 和我的年龄给了我可能今年唯一能看的成绩。
-day 0麦会炸，是那种嘶吼声的回音的感觉。
+                             day-?
+报名被报成线上了，寄寄寄。
+ day-?
+P 和我的年龄给了我可能今年唯一能看的成绩。
+ day 0
+麦会炸，是那种嘶吼声的回音的感觉。
 字符串，感觉自己没学过了。
 直播能很好看到旷课人数，很震撼，签到更震撼。
-同时知道了 __线上...
+同时知道...
                         
                     </p>
                 </div>
@@ -760,10 +774,11 @@ day 0麦会炸，是那种嘶吼声的回音的感觉。
                     <p itemProp="description">
                         
                             “まだ動くまだ進む 物語の上を泳げ” —— 《スイマー》
-分析维护一个栈，每次加入一个值。
+ 分析
+维护一个栈，每次加入一个值。
 如果栈顶在之后也会出现并且比加入的值大就弹出。
 这样使得每个值尽可能放在前面。
-粗略的证明一下。假设有两个序列 $A,B$，$A$ 的字典序小...
+粗略的证明一下。假设有两个序列 A,BA,BA,B，AAA...
                         
                     </p>
                 </div>
@@ -1026,7 +1041,7 @@ day 0麦会炸，是那种嘶吼声的回音的感觉。
 
 <!-- 额外的追加注入项 -->
 
-    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: !0 }, { left: "$", right: "$", display: !1 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setInterval((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
+    <body><noscript>You need to enable JavaScript to run this app.</noscript><script>var ketax_config = { delimiters: [{ left: "$$", right: "$$", display: 1 }, { left: "$", right: "$", display: 0 }] }</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb"crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"></script><script>setTimeout((function () { renderMathInElement(document.body, ketax_config) }), 1e3)</script><div id="root"></div></body>
 
 
         <script>
