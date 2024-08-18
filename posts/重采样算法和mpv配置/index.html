@@ -26,8 +26,8 @@
 <meta property="og:site_name">
 <meta property="og:description" content="因为想好好看番，同时屏幕不是 1080p 默认的双线性缩放质量很差所以被迫学习了下。 视频相关知识是看的 vcb-s 的教程，比如压缩原理和视频瑕疵。 播放器先参考 vcb-s 的 mpv 指南，至少先把 mpv 下载下来，我用的是 iina。 重采样这些是看的 imagemagick。 重采样滤镜的对比，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。 上面这些全都是前置知识，不看的话会">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-08-18T14:20:58.853Z">
-<meta property="article:modified_time" content="2024-08-18T14:20:55.049Z">
+<meta property="article:published_time" content="2024-08-18T14:23:14.899Z">
+<meta property="article:modified_time" content="2024-08-18T14:23:11.379Z">
 <meta property="article:author" content="All contributors">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="theme">
@@ -210,7 +210,7 @@
                 <h1 class="kratos-page-title text-center" itemprop="name headline">重采样算法和 mpv 配置</h1>
             
             <ul class="kratos-page-meta text-center">
-                <li><time datetime="2024-08-18T14:20:58.853Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-08-18</time></li>
+                <li><time datetime="2024-08-18T14:23:14.899Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-08-18</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">DaydreamWarrior</span>
                 </li>
@@ -246,7 +246,7 @@
 <p>直接乘 sinc 会产生很强的 ringing，做了傅立叶变换之后就看得到，不加窗的旁瓣能量很大，虽然主瓣最窄也就是最锐利。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%AA%97%E5%87%BD%E6%95%B0">窗函数</a> 的旁瓣越小 ringing 越小，主瓣越宽越模糊。</p>
 <p>所以要加窗，sinc windowed-sinc 就是 <code>lanczos</code> 算法，一般是 3tap。</p>
 <p>也可以不行列然后做，ewa 相关算法就是直接采样圆内的点，用的是的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>jinc</mtext></mrow><annotation encoding="application/x-tex">\text{jinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623000000000001em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">jinc</span></span></span></span></span>，和 sinc 强相关，二维的理想低通滤波器。jinc windowed-jinc 就是 <code>ewa_lanczos</code>。jinc windowed-hann 就是 <code>ewa_hanning</code>。</p>
-<p>也许会好奇 <code>ewa_lanczos</code> 的距离为什么是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3.2383154841662362</mn></mrow><annotation encoding="application/x-tex">3.2383154841662362</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">.</span><span class="mord">2</span><span class="mord">3</span><span class="mord">8</span><span class="mord">3</span><span class="mord">1</span><span class="mord">5</span><span class="mord">4</span><span class="mord">8</span><span class="mord">4</span><span class="mord">1</span><span class="mord">6</span><span class="mord">6</span><span class="mord">2</span><span class="mord">3</span><span class="mord">6</span><span class="mord">2</span></span></span></span>，因为这是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>jinc</mtext></mrow><annotation encoding="application/x-tex">\text{jinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623000000000001em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">jinc</span></span></span></span></span> 第一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的位置。</p>
+<p>也许会好奇 <code>ewa_lanczos</code> 的距离为什么是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3.2383154841662362</mn></mrow><annotation encoding="application/x-tex">3.2383154841662362</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">.</span><span class="mord">2</span><span class="mord">3</span><span class="mord">8</span><span class="mord">3</span><span class="mord">1</span><span class="mord">5</span><span class="mord">4</span><span class="mord">8</span><span class="mord">4</span><span class="mord">1</span><span class="mord">6</span><span class="mord">6</span><span class="mord">2</span><span class="mord">3</span><span class="mord">6</span><span class="mord">2</span></span></span></span>，因为这是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>jinc</mtext></mrow><annotation encoding="application/x-tex">\text{jinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623000000000001em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">jinc</span></span></span></span></span> 第三个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 的位置。</p>
 <p><code>lanczos</code> <code>spline36</code> <code>ewa_lanczos</code> 和其变体都被认为是比较好的算法，前两适合实拍后者适合 anime。</p>
 <p>锐的程度</p>
 <p><code>ewa_lanczos4sharpest</code> &gt; <code>lanczos</code> &gt; <code>spline36</code> &gt; <code>ewa_lanczossharp</code> &gt; <code>ewa_hanning</code></p>
@@ -281,7 +281,7 @@
                     
                 </div>
                 <div class="pull-date">
-                    <time datetime="2024-08-18T14:20:55.049Z" itemprop="dateModified">最后编辑：2024-08-18</time>
+                    <time datetime="2024-08-18T14:23:11.379Z" itemprop="dateModified">最后编辑：2024-08-18</time>
                 </div>
             </div>
         </footer>
