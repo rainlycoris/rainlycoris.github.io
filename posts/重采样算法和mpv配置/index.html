@@ -19,15 +19,15 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="因为想好好看番，同时屏幕不是 1080p 默认的双线性缩放质量很差所以被迫学习了下。 视频相关知识是看的 vcb-s 的教程，比如压缩原理和视频瑕疵。 播放器先参考 vcb-s 的 mpv 指南，至少先把 mpv 下载下来，我用的是 iina。 重采样这些是看的 imagemagick。 重采样滤镜的对比，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。 大概就是缩放要么做插值，先对列做然">
+  <meta name="description" content="因为想好好看番，同时屏幕不是 1080p 默认的双线性缩放质量很差所以被迫学习了下。 视频相关知识是看的 vcb-s 的教程，比如压缩原理和视频瑕疵。 播放器先参考 vcb-s 的 mpv 指南，至少先把 mpv 下载下来，我用的是 iina。 重采样这些是看的 imagemagick。 重采样滤镜的对比，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。 上面这些全都是前置知识，不看的话会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重采样算法和 mpv 配置">
 <meta property="og:url" content="https://krt.moe/posts/%E9%87%8D%E9%87%87%E6%A0%B7%E7%AE%97%E6%B3%95%E5%92%8Cmpv%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="因为想好好看番，同时屏幕不是 1080p 默认的双线性缩放质量很差所以被迫学习了下。 视频相关知识是看的 vcb-s 的教程，比如压缩原理和视频瑕疵。 播放器先参考 vcb-s 的 mpv 指南，至少先把 mpv 下载下来，我用的是 iina。 重采样这些是看的 imagemagick。 重采样滤镜的对比，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。 大概就是缩放要么做插值，先对列做然">
+<meta property="og:description" content="因为想好好看番，同时屏幕不是 1080p 默认的双线性缩放质量很差所以被迫学习了下。 视频相关知识是看的 vcb-s 的教程，比如压缩原理和视频瑕疵。 播放器先参考 vcb-s 的 mpv 指南，至少先把 mpv 下载下来，我用的是 iina。 重采样这些是看的 imagemagick。 重采样滤镜的对比，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。 上面这些全都是前置知识，不看的话会">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-08-18T14:18:07.895Z">
-<meta property="article:modified_time" content="2024-08-18T14:17:59.297Z">
+<meta property="article:published_time" content="2024-08-18T14:20:58.853Z">
+<meta property="article:modified_time" content="2024-08-18T14:20:55.049Z">
 <meta property="article:author" content="All contributors">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="theme">
@@ -210,7 +210,7 @@
                 <h1 class="kratos-page-title text-center" itemprop="name headline">重采样算法和 mpv 配置</h1>
             
             <ul class="kratos-page-meta text-center">
-                <li><time datetime="2024-08-18T14:18:07.895Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-08-18</time></li>
+                <li><time datetime="2024-08-18T14:20:58.853Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-08-18</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">DaydreamWarrior</span>
                 </li>
@@ -219,7 +219,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~2.02K
+                            ~2.05K
                         
                         字
                     </li>
@@ -238,7 +238,8 @@
 <p>播放器先参考 vcb-s 的 <a target="_blank" rel="noopener" href="https://vcb-s.com/archives/7594">mpv 指南</a>，至少先把 mpv 下载下来，我用的是 iina。</p>
 <p>重采样这些是看的 <a target="_blank" rel="noopener" href="https://www.imagemagick.org/Usage/filter/">imagemagick</a>。</p>
 <p>重采样滤镜的<a target="_blank" rel="noopener" href="https://artoriuz.github.io/blog/imagemagick_resampling.html">对比</a>，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。</p>
-<p>大概就是缩放要么做插值，先对列做然后对行做（反之的结果是一样的），比如线性 <code>bilinear</code> 或者三次拟合 <code>cubic</code> 和 <code>spline</code>，还有 Mitchell-Netravali 系列的。或者就是卷积，比如乘上 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>sinc</mtext></mrow><annotation encoding="application/x-tex">\text{sinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord text"><span class="mord">sinc</span></span></span></span></span>。</p>
+<p><s>上面这些全都是前置知识，不看的话会看不懂我在说什么。</s></p>
+<p>重采样大概就是缩放要么做插值，先对列做然后对行做（反之的结果是一样的），比如线性 <code>bilinear</code> 或者三次拟合 <code>cubic</code> 和 <code>spline</code>，还有 Mitchell-Netravali 系列的。或者就是卷积，比如乘上 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>sinc</mtext></mrow><annotation encoding="application/x-tex">\text{sinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord text"><span class="mord">sinc</span></span></span></span></span>。</p>
 <p>插值就是卷积，<code>bilinear</code> 和 <code>triangle</code> 是相同的。</p>
 <p>满足奈奎斯特采样定律的话，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>sinc</mtext></mrow><annotation encoding="application/x-tex">\text{sinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord text"><span class="mord">sinc</span></span></span></span></span> 有可能还原出原本的曲线，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>sinc</mtext></mrow><annotation encoding="application/x-tex">\text{sinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord text"><span class="mord">sinc</span></span></span></span></span> 是理想低通滤波器。</p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>sinc</mtext></mrow><annotation encoding="application/x-tex">\text{sinc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord text"><span class="mord">sinc</span></span></span></span></span> 也不能直接做一整行的，不仅是性能还因为 ringing，找最近的若干个采样点做。</p>
@@ -280,7 +281,7 @@
                     
                 </div>
                 <div class="pull-date">
-                    <time datetime="2024-08-18T14:17:59.297Z" itemprop="dateModified">最后编辑：2024-08-18</time>
+                    <time datetime="2024-08-18T14:20:55.049Z" itemprop="dateModified">最后编辑：2024-08-18</time>
                 </div>
             </div>
         </footer>
