@@ -27,7 +27,7 @@
 <meta property="og:description" content="因为想好好看番，同时屏幕不是 1080p 默认的双线性缩放质量很差所以被迫学习了下。 视频相关知识是看的 vcb-s 的教程，比如压缩原理和视频瑕疵。 播放器先参考 vcb-s 的 mpv 指南，至少先把 mpv 下载下来，我用的是 iina。 重采样这些是看的 imagemagick。 重采样滤镜的对比，我觉得只能反应谁锐，PSNR 和 SSIM 都比较神秘。 上面这些全都是前置知识，不看的话会">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-08-18T15:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-18T16:38:22.632Z">
+<meta property="article:modified_time" content="2024-08-22T04:47:49.638Z">
 <meta property="article:author" content="All contributors">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="theme">
@@ -261,7 +261,7 @@
 <p>我用的 KrigBilateral，大概是结合亮度信息作 krig 插值，效果几乎是最好的，但是人眼对色度不敏感，所以我带有心理安慰的成分。vcb-s 建议是 <code>catmull_rom</code>。mpv 默认的高质量非常魔怔，用的和上采样一样也是 <code>ewa_lanczossharp</code>。</p>
 <p>我还是把 deband 打开了的，这也是 vcb-s 的建议。下采样我用的 <code>spline36</code>。</p>
 <p>所以我的配置是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scale = ewa_hanning</span><br><span class="line">dscale = spline36</span><br><span class="line">dither-depth = 10</span><br><span class="line">deband = yes</span><br><span class="line">glsl-shaders = /Users/ldl/.config/mpv/shaders/KrigBilateral.glsl</span><br><span class="line">blend-subtitles = video</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scale = ewa_hanning</span><br><span class="line">dscale = spline36</span><br><span class="line">dither-depth = 10</span><br><span class="line">deband = yes</span><br><span class="line">glsl-shaders = &quot;~~/shaders/KrigBilateral.glsl&quot;</span><br><span class="line">blend-subtitles = video</span><br></pre></td></tr></table></figure>
 <p>这样的配置对于我性能也足够，看 live 和 anime 都比较通用，总之我现在比较满意，也绝对不再折腾了。</p>
 <p>更多配置可以参考<a target="_blank" rel="noopener" href="https://github.com/mpv-player/mpv/blob/master/DOCS/man/options.rst">官方手册</a>。高质量的讨论可以参考升级 high-quality 默认的 <a target="_blank" rel="noopener" href="https://github.com/mpv-player/mpv/pull/12384">issue</a>。</p>
 </div>
@@ -281,7 +281,7 @@
                     
                 </div>
                 <div class="pull-date">
-                    <time datetime="2024-08-18T16:38:22.632Z" itemprop="dateModified">最后编辑：2024-08-19</time>
+                    <time datetime="2024-08-22T04:47:49.638Z" itemprop="dateModified">最后编辑：2024-08-22</time>
                 </div>
             </div>
         </footer>
