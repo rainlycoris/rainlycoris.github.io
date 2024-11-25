@@ -6,7 +6,7 @@
   <link href="https://krt.moe/atom.xml" rel="self"/>
   
   <link href="https://krt.moe/"/>
-  <updated>2024-11-08T15:08:18.903Z</updated>
+  <updated>2024-11-25T14:40:23.633Z</updated>
   <id>https://krt.moe/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://krt.moe/posts/%E4%BB%8A%E5%90%8E/"/>
     <id>https://krt.moe/posts/%E4%BB%8A%E5%90%8E/</id>
     <published>2024-11-02T15:28:00.000Z</published>
-    <updated>2024-11-08T15:08:18.903Z</updated>
+    <updated>2024-11-25T14:40:23.633Z</updated>
     
-    <content type="html"><![CDATA[<p>距离 NOIP 只剩四周了，所以我想扯点东西然后想一下以后该怎么办。</p><hr /><p>我学 OI 也有四年了，感觉，后三年的水平没有什么变化。</p><p>科技的进步和 trick 的积累是有的，但是感觉，还是差了点什么。</p><p>可能就是我笨吧。</p><p>之前的训练方法也确实有问题，ds 很喜欢写，模拟赛补题也比较困难。</p><hr /><p>这么快就又到这里了，不过这次是我最后的机会了。</p><p>之前拿了三年的 NOIP 2=，也真是可笑呢。</p><p>这三年，犯了很多严重的错，想起了很多重要的事，还有很多相遇和分别。</p><p>终于到现在，填上了人生的空白。</p><hr /><p>四周的时间，一定能改变什么。</p><p>暂定每天一场 ARC/AGC，还有洛谷的省选计划题单补一下。</p><p>之前就说要学的那些和题也记得做一下。</p><p>不要再去写数据结构了，最后打倒我的，一定不会是 ds。</p><p>稳定一下心态和情绪之类的，不要动不动急眼和发脾气了。</p><p>还要早睡和好好吃饭。</p><p><img src="https://cdn.luogu.com.cn/upload/image_hosting/1ymfv6a5.png" alt="" /></p><h2 id="113"><a class="markdownIt-Anchor" href="#113"></a> 11.3</h2><p>今天被数据结构打败了，原来三维求前驱比数点弱，可以做到单 log，之前只知道点对是这样的。</p><p>看来我还是一点长处没有。</p><p>不过计划还是不会改，需要做的事太多了不可能都做完的。</p><h2 id="114"><a class="markdownIt-Anchor" href="#114"></a> 11.4</h2><p>csp 没挂分，还进了队线。</p><p>NOIP 可能就不会这么幸运了吧，我也不会 csp 的 T4，还是很清楚自己是什么水平，不过至少有希望了。</p><h2 id="115"><a class="markdownIt-Anchor" href="#115"></a> 11.5</h2><p>今日模拟赛只过了 T1，垫底了。</p><h2 id="116"><a class="markdownIt-Anchor" href="#116"></a> 11.6</h2><p>在模拟见到 ds 狂写 9kb 赛后 30 min 过了。</p><p>所以我不会 ds，一切都只是我的单相思。</p><p>AT 也在刷，省选计划的题单也在补，真的会实现梦想吗。</p><h2 id="118"><a class="markdownIt-Anchor" href="#118"></a> 11.8</h2><p>下午像是磕了药，晚上药效就过了。</p><p>已经五天了，有什么改变吗。</p><p><img src="https://cdn.luogu.com.cn/upload/image_hosting/keza3183.png" alt="" /></p><p>离那一天又进了一点。</p>]]></content>
+    <content type="html"><![CDATA[<p>距离 NOIP 只剩四周了，所以我想扯点东西然后想一下以后该怎么办。</p><hr /><p>我学 OI 也有四年了，感觉，后三年的水平没有什么变化。</p><p>科技的进步和 trick 的积累是有的，但是感觉，还是差了点什么。</p><p>可能就是我笨吧。</p><p>之前的训练方法也确实有问题，ds 很喜欢写，模拟赛补题也比较困难。</p><hr /><p>这么快就又到这里了，不过这次是我最后的机会了。</p><p>之前拿了三年的 NOIP 2=，也真是可笑呢。</p><p>这三年，犯了很多严重的错，想起了很多重要的事，还有很多相遇和分别。</p><p>终于到现在，填上了人生的空白。</p><hr /><p>四周的时间，一定能改变什么。</p><p>暂定每天一场 ARC/AGC，还有洛谷的省选计划题单补一下。</p><p>之前就说要学的那些和题也记得做一下。</p><p>不要再去写数据结构了，最后打倒我的，一定不会是 ds。</p><p>稳定一下心态和情绪之类的，不要动不动急眼和发脾气了。</p><p>还要早睡和好好吃饭。</p><p><img src="https://cdn.luogu.com.cn/upload/image_hosting/1ymfv6a5.png" alt="" /></p><h2 id="113"><a class="markdownIt-Anchor" href="#113"></a> 11.3</h2><p>今天被数据结构打败了，原来三维求前驱比数点弱，可以做到单 log，之前只知道点对是这样的。</p><p>看来我还是一点长处没有。</p><p>不过计划还是不会改，需要做的事太多了不可能都做完的。</p><h2 id="114"><a class="markdownIt-Anchor" href="#114"></a> 11.4</h2><p>csp 没挂分，还进了队线。</p><p>NOIP 可能就不会这么幸运了吧，我也不会 csp 的 T4，还是很清楚自己是什么水平，不过至少有希望了。</p><h2 id="115"><a class="markdownIt-Anchor" href="#115"></a> 11.5</h2><p>今日模拟赛只过了 T1，垫底了。</p><h2 id="116"><a class="markdownIt-Anchor" href="#116"></a> 11.6</h2><p>在模拟见到 ds 狂写 9kb 赛后 30 min 过了。</p><p>所以我不会 ds，一切都只是我的单相思。</p><p>AT 也在刷，省选计划的题单也在补，真的会实现梦想吗。</p><h2 id="118"><a class="markdownIt-Anchor" href="#118"></a> 11.8</h2><p>下午像是磕了药，晚上药效就过了。</p><p>已经五天了，有什么改变吗。</p><p><img src="https://cdn.luogu.com.cn/upload/image_hosting/keza3183.png" alt="" /></p><p>离那一天又进了一点。</p><h2 id="119"><a class="markdownIt-Anchor" href="#119"></a> 11.9</h2><p>模拟赛把数组大小 4100 打成 4010 了，幽默死了。</p><p>都在按照计划中的推进。</p><p>今天有点懈怠了。</p><h2 id="1110"><a class="markdownIt-Anchor" href="#1110"></a> 11.10</h2><p>ccpc 队友让我 Au 了，还有顽强拼搏奖。</p><p>想要拯救自己啊。</p><h2 id="1114"><a class="markdownIt-Anchor" href="#1114"></a> 11.14</h2><p>可能还是要写点 ds，发现 kdt 其实有用，历史查询也要补一下。</p><p>今天一天都感觉喘不过气，还有 16 天了。</p><h2 id="1115"><a class="markdownIt-Anchor" href="#1115"></a> 11.15</h2><p>今天感觉，什么都没做。</p><p>找不到状态，vp 一下 at 看看能恢复不，打模拟赛有点打麻了。</p><h2 id="1116"><a class="markdownIt-Anchor" href="#1116"></a> 11.16</h2><p>已经打起精神了。</p><p>水的 pv 18 号就要发了。</p><p>又感觉到了悲伤。</p><p>歌很应景的切到了 だってだって噫無情。</p><p>模拟赛的状态倒是在变好。</p><p>之后会再努力一点的。</p><hr /><p>已经不到两周了，前面的时间也算是没犯错。</p><p>这个梦想，是我最重视的，也是唯一能实现的。</p><p>请实现我的愿望吧。</p><h2 id="1117"><a class="markdownIt-Anchor" href="#1117"></a> 11.17</h2><p>求求你再想起来吧。</p><p>明天的话，把 NOIP2022 比赛写完，把前面两天模拟赛的题补了。</p><p>应该不会再浪费时间了。</p><h2 id="1118"><a class="markdownIt-Anchor" href="#1118"></a> 11.18</h2><p>今天熬夜是为了看水水的 mv。</p><p>哭不出来啊。</p><p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tbk62yd5.png" alt="" /></p><p>记得加训构造。</p><h2 id="1119"><a class="markdownIt-Anchor" href="#1119"></a> 11.19</h2><p>NOIP2023T2 三值逻辑，我的代码没有判断 + x y 时 x==y，现在知道了。</p><p>记得当时开局很好，T1T4 1h 过了，结果 T2 一直没调出来，最后急哭了。</p><p>如果注意到了 x=y 的话，或许我的人生就不会像现在这样失败了。</p><p>不过要是不急的话，或许还有机会发现的，今年我肯定也不会再急了。</p><p>一定会全力打一场的，用我不堪的真实水平，好好地结束也没什么不好的。</p><p>现在心情很好。</p><h2 id="1120"><a class="markdownIt-Anchor" href="#1120"></a> 11.20</h2><p>水的 fl 日期是 6.21-6.22，太好了。</p><p>但是是西武，不好说抽不抽的到票了。</p><p>不过能让我处理好 oi 这边的事了。</p><h2 id="1122"><a class="markdownIt-Anchor" href="#1122"></a> 11.22</h2><p>密码锁 shuffle 一遍过了，不知道当时在干什么。</p><p>好想告诉当时的自己，其实自己是做的到的。</p><hr /><p>还有一周的，到最后都不会放弃的。</p><h2 id="1125"><a class="markdownIt-Anchor" href="#1125"></a> 11.25</h2><p>绝对做得到的。</p>]]></content>
     
     
       
@@ -278,9 +278,9 @@
     
     <category term="题解" scheme="https://krt.moe/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="平衡树" scheme="https://krt.moe/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/"/>
-    
     <category term="笔记" scheme="https://krt.moe/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="平衡树" scheme="https://krt.moe/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/"/>
     
     <category term="学习笔记" scheme="https://krt.moe/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
