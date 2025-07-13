@@ -6,7 +6,7 @@
   <link href="https://krt.moe/atom.xml" rel="self"/>
   
   <link href="https://krt.moe/"/>
-  <updated>2025-06-08T14:33:20.786Z</updated>
+  <updated>2025-07-13T08:14:03.821Z</updated>
   <id>https://krt.moe/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ヨハネ生日快乐</title>
+    <link href="https://krt.moe/posts/%E3%83%A8%E3%83%8F%E3%83%8D%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/"/>
+    <id>https://krt.moe/posts/%E3%83%A8%E3%83%8F%E3%83%8D%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/</id>
+    <published>2025-07-12T16:00:00.000Z</published>
+    <updated>2025-07-13T08:14:03.821Z</updated>
+    
+    <content type="html"><![CDATA[<p>善子生日快乐哦</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;善子生日快乐哦&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>伤仲永</title>
@@ -298,9 +319,9 @@
     
     <category term="题解" scheme="https://krt.moe/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="笔记" scheme="https://krt.moe/tags/%E7%AC%94%E8%AE%B0/"/>
-    
     <category term="平衡树" scheme="https://krt.moe/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/"/>
+    
+    <category term="笔记" scheme="https://krt.moe/tags/%E7%AC%94%E8%AE%B0/"/>
     
     <category term="学习笔记" scheme="https://krt.moe/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
@@ -485,32 +506,6 @@
     <category term="学习笔记" scheme="https://krt.moe/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     <category term="整体二分" scheme="https://krt.moe/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>P4732 题解</title>
-    <link href="https://krt.moe/posts/P4732/"/>
-    <id>https://krt.moe/posts/P4732/</id>
-    <published>2023-07-09T16:00:00.000Z</published>
-    <updated>2024-08-02T03:44:57.382Z</updated>
-    
-    <content type="html"><![CDATA[<p>“这样的我会被谁拯救吗　你发现了吧” —— 《月光掌》</p><h2 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h2><p>设第 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span> 次撤销操作要撤销的是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span>，那么 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> 的操作中不存在优先级比 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> 小的，所以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span> 的操作不会在没撤销 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span> 的情况下被撤销。</p><p>考虑可持久化线段树，维护操作的优先级，撤销操作 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span> 直接继承 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">j-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 的线段树，查询 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> 直接线段树上二分。</p><h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">300005</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">segtree</span>&#123;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">struct</span>&#123;<span class="type">int</span> l,r,v;&#125; tr[N*<span class="number">30</span>];</span><br><span class="line">        <span class="type">int</span> root[N],idx;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;tr[u].v = <span class="built_in">min</span>(tr[tr[u].l].v,tr[tr[u].r].v);&#125;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">segtree</span>()&#123;tr[<span class="number">0</span>].v=<span class="number">1e9</span>;&#125;</span><br><span class="line">        <span class="type">int</span>&amp; <span class="keyword">operator</span> [](<span class="type">const</span> <span class="type">int</span> &amp;x)&#123;<span class="keyword">return</span> root[x];&#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> &amp;u,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> p,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">            tr[++idx] = tr[u];</span><br><span class="line">            u = idx;</span><br><span class="line">            <span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">                tr[u].v = v;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(p&lt;=mid)</span><br><span class="line">                <span class="built_in">modify</span>(tr[u].l,l,mid,p,v);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">modify</span>(tr[u].r,mid+<span class="number">1</span>,r,p,v);</span><br><span class="line">            <span class="built_in">pushup</span>(u);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> p)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(l==r)</span><br><span class="line">                <span class="keyword">return</span> l;</span><br><span class="line">            <span class="type">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(!tr[u].r||tr[tr[u].r].v&gt;=p)</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">query</span>(tr[u].l,l,mid,p);</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">query</span>(tr[u].r,mid+<span class="number">1</span>,r,p);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;tr;</span><br><span class="line"><span class="type">int</span> ans[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n = in;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)&#123;</span><br><span class="line">        <span class="type">int</span> x = in;</span><br><span class="line">        <span class="keyword">if</span>(x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            tr[k] = tr[k<span class="number">-1</span>];</span><br><span class="line">            ans[k] = x;</span><br><span class="line">            tr.<span class="built_in">modify</span>(tr[k],<span class="number">1</span>,n,k,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="type">int</span> p = tr.<span class="built_in">query</span>(tr[k<span class="number">-1</span>],<span class="number">1</span>,n,-x);</span><br><span class="line">            tr[k] = tr[p<span class="number">-1</span>];</span><br><span class="line">            ans[k] = ans[p<span class="number">-1</span>];</span><br><span class="line">            tr.<span class="built_in">modify</span>(tr[k],<span class="number">1</span>,n,k,-x);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">out</span>(ans[k],<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;“这样的我会被谁拯救吗　你发现了吧” —— 《月光掌》&lt;/p&gt;
-&lt;h2 id=&quot;分析&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#分析&quot;&gt;&lt;/a&gt; 分析&lt;/h2&gt;
-&lt;p&gt;设第 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;k</summary>
-      
-    
-    
-    
-    
-    <category term="题解笔记" scheme="https://krt.moe/tags/%E9%A2%98%E8%A7%A3%E7%AC%94%E8%AE%B0/"/>
-    
-    <category term="可持久化线段树" scheme="https://krt.moe/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
